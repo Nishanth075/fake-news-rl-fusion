@@ -278,6 +278,16 @@ python scripts/run_robustness.py --config configs/robustness.yaml
 ```
 
 This debug-stage robustness test degrades saved modality probabilities/quality scores and measures whether the selected modality weight moves in the expected direction. Later full robustness will regenerate degraded image/text predictions through the trained branches.
+
+## Stage 8 Debug Result Export
+
+Collect debug-stage outputs into thesis-friendly CSV/JSON tables:
+
+```bash
+python scripts/export_results.py --config configs/results_export.yaml
+```
+
+This writes method comparison, stage status and summary files under `outputs/tables/`.
 ## Tests
 
 Run:
@@ -294,6 +304,7 @@ pytest
 - Use validation data for model selection.
 - Use the untouched test set only for final evaluation.
 - Report negative or mixed findings honestly.
+
 
 
 

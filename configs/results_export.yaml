@@ -1,0 +1,18 @@
+﻿seed: 42
+
+paths:
+  output_dir: outputs/tables
+  summary_json: outputs/tables/debug_results_summary.json
+  method_table_csv: outputs/tables/debug_method_comparison.csv
+  stage_status_csv: outputs/tables/debug_stage_status.csv
+
+inputs:
+  fakeddit_stats: outputs/metrics/fakeddit_stats.json
+  image_metrics: outputs/metrics/image_outputs_debug_metrics.json
+  text_metrics: outputs/metrics/text_outputs_debug_metrics.json
+  baseline_results: outputs/metrics/baseline_debug_results.csv
+  rl_metrics: outputs/metrics/rl_fusion_debug_metrics.json
+  rl_policy_analysis: outputs/metrics/rl_policy_analysis.json
+  ablation_summary: outputs/metrics/ablation_debug_summary.csv
+  robustness_summary: outputs/robustness/robustness_debug_summary.csv
+  image_download_stats: data/debug_splits_available/image_download_stats.json
