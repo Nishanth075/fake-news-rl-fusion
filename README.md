@@ -251,6 +251,13 @@ python scripts/train_rl_fusion.py --config configs/fusion.yaml
 ```
 
 This trains only on `train_outputs.csv`, selects the best checkpoint using validation macro F1, and evaluates once on `test_outputs.csv`.
+Analyze the trained RL policy:
+
+```bash
+python scripts/analyze_rl_policy.py --config configs/rl_analysis.yaml
+```
+
+This reports action distribution, average modality weights, quality-group behavior, agreement/disagreement behavior and an oracle upper bound for the fixed seven-action fusion space.
 ## Tests
 
 Run:
@@ -267,6 +274,7 @@ pytest
 - Use validation data for model selection.
 - Use the untouched test set only for final evaluation.
 - Report negative or mixed findings honestly.
+
 
 
 
