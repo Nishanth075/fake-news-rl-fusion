@@ -258,6 +258,16 @@ python scripts/analyze_rl_policy.py --config configs/rl_analysis.yaml
 ```
 
 This reports action distribution, average modality weights, quality-group behavior, agreement/disagreement behavior and an oracle upper bound for the fixed seven-action fusion space.
+
+## Stage 6 RL State Ablation
+
+Compare contextual-bandit RL fusion with different state feature sets:
+
+```bash
+python scripts/run_ablation.py --config configs/ablation.yaml
+```
+
+This compares probabilities-only, prediction-confidence and full reliability-aware state representations.
 ## Tests
 
 Run:
@@ -274,6 +284,7 @@ pytest
 - Use validation data for model selection.
 - Use the untouched test set only for final evaluation.
 - Report negative or mixed findings honestly.
+
 
 
 

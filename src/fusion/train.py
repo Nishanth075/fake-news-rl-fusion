@@ -29,7 +29,8 @@ def train_rl_fusion(config: dict[str, Any]) -> dict[str, Any]:
 
     train_df = pd.read_csv(paths["train_outputs"])
     validation_df = pd.read_csv(paths["validation_outputs"])
-    train_states = torch.tensor(build_states(train_df), dtype=torch.float32)
+    feature_columns = fusion_config.get("features")
+    train_states = torch.tensor(build_states(train_df, feature_columns), dtype=torch.float32)
     train_dataset = TensorDataset(train_states, torch.arange(len(train_df), dtype=torch.long))
     loader = DataLoader(
         train_dataset,
@@ -38,10 +39,11 @@ def train_rl_fusion(config: dict[str, Any]) -> dict[str, Any]:
     )
 
     model = FusionQNetwork(
-        state_dim=int(fusion_config["state_dim"]),
+        state_dim=int(fusion_config.get("state_dim", len(feature_columns or []))),
         action_dim=int(fusion_config["action_dim"]),
         dropout=float(fusion_config.get("dropout", 0.1)),
     ).to(device)
+    model.feature_columns = feature_columns
     optimizer = torch.optim.Adam(model.parameters(), lr=float(fusion_config["learning_rate"]))
     criterion = nn.MSELoss()
 
@@ -112,11 +114,13 @@ def evaluate_rl_fusion(config: dict[str, Any], split: str = "test") -> dict[str,
         raise FileNotFoundError(f"Fusion checkpoint not found: {checkpoint_path}")
 
     checkpoint = torch.load(checkpoint_path, map_location=device)
+    feature_columns = config["fusion"].get("features")
     model = FusionQNetwork(
-        state_dim=int(config["fusion"]["state_dim"]),
+        state_dim=int(config["fusion"].get("state_dim", len(feature_columns or []))),
         action_dim=int(config["fusion"]["action_dim"]),
         dropout=float(config["fusion"].get("dropout", 0.1)),
     ).to(device)
+    model.feature_columns = feature_columns
     model.load_state_dict(checkpoint["model_state_dict"])
     predictions = predict_with_model(model, df, device)
     metrics = binary_classification_metrics(df["label"].to_numpy(), predictions["final_probability"].to_numpy())
@@ -137,7 +141,8 @@ def evaluate_rl_fusion(config: dict[str, Any], split: str = "test") -> dict[str,
 
 def predict_with_model(model: nn.Module, df: pd.DataFrame, device: torch.device) -> pd.DataFrame:
     model.eval()
-    states = torch.tensor(build_states(df), dtype=torch.float32, device=device)
+    feature_columns = getattr(model, "feature_columns", None)
+    states = torch.tensor(build_states(df, feature_columns), dtype=torch.float32, device=device)
     with torch.no_grad():
         actions = torch.argmax(model(states), dim=1).detach().cpu().numpy().astype(int)
     weights = np.asarray([FUSION_ACTIONS[action] for action in actions], dtype=np.float32)
@@ -217,3 +222,4 @@ def _linear_epsilon(epoch: int, epochs: int, start: float, end: float) -> float:
 
 def _action_distribution(actions: np.ndarray) -> dict[str, int]:
     return {str(index): int((actions == index).sum()) for index in range(len(FUSION_ACTIONS))}
+

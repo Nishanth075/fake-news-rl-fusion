@@ -1,0 +1,35 @@
+﻿seed: 42
+
+base_fusion:
+  action_dim: 7
+  hidden_dims: [64, 32]
+  dropout: 0.1
+  learning_rate: 0.001
+  batch_size: 64
+  epochs: 50
+  epsilon_start: 1.0
+  epsilon_end: 0.05
+
+paths:
+  train_outputs: data/modality_outputs/train_outputs.csv
+  validation_outputs: data/modality_outputs/validation_outputs.csv
+  test_outputs: data/modality_outputs/test_outputs.csv
+  output_dir: outputs/metrics/ablations
+  summary_path: outputs/metrics/ablation_debug_summary.csv
+
+ablations:
+  - name: probabilities_only
+    features: [image_probability, text_probability]
+  - name: prediction_confidence
+    features: [image_probability, image_confidence, text_probability, text_confidence]
+  - name: full_reliability_state
+    features:
+      - image_probability
+      - image_confidence
+      - image_quality
+      - text_probability
+      - text_confidence
+      - text_quality
+      - disagreement
+      - confidence_difference
+      - quality_difference

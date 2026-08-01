@@ -33,5 +33,10 @@ def build_state_frame(df: pd.DataFrame) -> pd.DataFrame:
     return state_df.clip(-1.0, 1.0)
 
 
-def build_states(df: pd.DataFrame) -> np.ndarray:
-    return build_state_frame(df)[STATE_COLUMNS].to_numpy(dtype=np.float32)
+def build_states(df: pd.DataFrame, feature_columns: list[str] | None = None) -> np.ndarray:
+    columns = feature_columns or STATE_COLUMNS
+    state_frame = build_state_frame(df)
+    missing = [column for column in columns if column not in state_frame.columns]
+    if missing:
+        raise ValueError(f"Unknown state feature columns: {missing}")
+    return state_frame[columns].to_numpy(dtype=np.float32)
