@@ -268,6 +268,16 @@ python scripts/run_ablation.py --config configs/ablation.yaml
 ```
 
 This compares probabilities-only, prediction-confidence and full reliability-aware state representations.
+
+## Stage 7 Robustness Experiments
+
+Run controlled modality degradation tests against the trained RL fusion policy:
+
+```bash
+python scripts/run_robustness.py --config configs/robustness.yaml
+```
+
+This debug-stage robustness test degrades saved modality probabilities/quality scores and measures whether the selected modality weight moves in the expected direction. Later full robustness will regenerate degraded image/text predictions through the trained branches.
 ## Tests
 
 Run:
@@ -284,6 +294,7 @@ pytest
 - Use validation data for model selection.
 - Use the untouched test set only for final evaluation.
 - Report negative or mixed findings honestly.
+
 
 
 
