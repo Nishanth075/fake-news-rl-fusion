@@ -19,3 +19,6 @@ paths:
   image_root: .
   checkpoint_dir: outputs/checkpoints/image_model
   metrics_path: outputs/metrics/image_model_debug_metrics.json
+  outputs_dir: data/modality_outputs
+  image_outputs_metrics_path: outputs/metrics/image_outputs_debug_metrics.json
+

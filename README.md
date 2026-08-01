@@ -188,6 +188,13 @@ python scripts/train_image_model.py --config configs/image_model.yaml
 ```
 
 The image model uses only the train split for training and selects the best checkpoint using validation macro F1.
+Generate image-branch outputs for fusion experiments:
+
+```bash
+python scripts/infer_image_model.py --config configs/image_model.yaml --splits train validation test
+```
+
+This writes image probabilities, predictions and confidence values under `data/modality_outputs/`.
 ## Tests
 
 Run:
@@ -204,6 +211,7 @@ pytest
 - Use validation data for model selection.
 - Use the untouched test set only for final evaluation.
 - Report negative or mixed findings honestly.
+
 
 
 
