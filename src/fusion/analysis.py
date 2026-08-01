@@ -105,11 +105,17 @@ def _group_weight_summary(df: pd.DataFrame, group_col: str) -> dict[str, dict[st
             "rows": int(len(group)),
             "average_image_weight": float(group["image_weight"].mean()),
             "average_text_weight": float(group["text_weight"].mean()),
-            "macro_f1": float(
-                binary_classification_metrics(group["label"].to_numpy(), group["final_probability"].to_numpy())["macro_f1"]
-            ),
+            "macro_f1": _safe_macro_f1(group),
         }
     return summary
+
+
+def _safe_macro_f1(group: pd.DataFrame) -> float | None:
+    if group["label"].nunique() < 2:
+        return None
+    return float(
+        binary_classification_metrics(group["label"].to_numpy(), group["final_probability"].to_numpy())["macro_f1"]
+    )
 
 
 def _quality_group_summary(df: pd.DataFrame, quality_col: str) -> dict[str, dict[str, float]]:
@@ -126,4 +132,5 @@ def _agreement_summary(df: pd.DataFrame) -> dict[str, dict[str, float]]:
     work = df.copy()
     work["modalities_agree"] = work["image_prediction"] == work["text_prediction"]
     return _group_weight_summary(work, "modalities_agree")
+
 
