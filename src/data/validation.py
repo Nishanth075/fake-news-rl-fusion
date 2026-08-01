@@ -49,7 +49,7 @@ def validate_paired_dataset(
     remove_duplicate_text: bool = True,
     remove_duplicate_image_paths: bool = True,
 ) -> tuple[pd.DataFrame, ValidationReport]:
-    """Validate the standardized paired image-text dataset."""
+    """Validate the standardized paired image-text dataset while preserving extra columns."""
     missing_columns = [column for column in REQUIRED_COLUMNS if column not in df.columns]
     if missing_columns:
         raise ValueError(f"Missing required columns: {missing_columns}")
@@ -93,7 +93,8 @@ def validate_paired_dataset(
         removed_duplicate_image_paths = int(duplicate_image_mask.sum())
         work = work.loc[~duplicate_image_mask].copy()
 
-    work = work[REQUIRED_COLUMNS].reset_index(drop=True)
+    extra_columns = [column for column in work.columns if column not in REQUIRED_COLUMNS]
+    work = work[REQUIRED_COLUMNS + extra_columns].reset_index(drop=True)
     removed_rows = original_rows - len(work)
     report = ValidationReport(
         input_rows=original_rows,
@@ -107,4 +108,3 @@ def validate_paired_dataset(
         removed_duplicate_image_paths=removed_duplicate_image_paths,
     )
     return work, report
-

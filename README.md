@@ -134,6 +134,30 @@ Fakeddit's `2_way_label` is converted to this project's standard:
 Fakeddit 0 = False/Fake  -> project 1 = Fake
 Fakeddit 1 = True/Real   -> project 0 = Real
 ```
+
+## Debug Subset and Images
+
+Create a small balanced subset for Colab smoke tests:
+
+```bash
+python scripts/create_debug_subset.py --config configs/debug_subset.yaml
+```
+
+This writes:
+
+```text
+data/debug_splits/train.csv
+data/debug_splits/validation.csv
+data/debug_splits/test.csv
+```
+
+Download only the debug subset images:
+
+```bash
+python scripts/download_images.py --config configs/image_download.yaml
+```
+
+Large image archives are intentionally avoided at the beginning. The first training check should use a small subset before scaling up.
 ## Colab Workflow
 
 After pushing changes to GitHub, run this in Colab:
@@ -164,4 +188,5 @@ pytest
 - Use validation data for model selection.
 - Use the untouched test set only for final evaluation.
 - Report negative or mixed findings honestly.
+
 

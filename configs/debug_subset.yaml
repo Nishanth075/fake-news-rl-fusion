@@ -1,0 +1,9 @@
+﻿seed: 42
+
+subset:
+  input_splits_dir: data/splits
+  output_dir: data/debug_splits
+  train_size: 500
+  validation_size: 100
+  test_size: 100
+  stratify: true
