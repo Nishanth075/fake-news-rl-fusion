@@ -172,6 +172,22 @@ drive.mount('/content/drive')
 !python scripts/prepare_dataset.py --config configs/data.yaml
 ```
 
+
+## Stage 2 Image Model Smoke Test
+
+After creating `data/debug_splits_available/`, verify the ResNet18 image branch with one train/evaluation batch:
+
+```bash
+python scripts/train_image_model.py --config configs/image_model.yaml --smoke-test
+```
+
+If the smoke test succeeds, run the small debug training configuration:
+
+```bash
+python scripts/train_image_model.py --config configs/image_model.yaml
+```
+
+The image model uses only the train split for training and selects the best checkpoint using validation macro F1.
 ## Tests
 
 Run:
@@ -188,6 +204,7 @@ pytest
 - Use validation data for model selection.
 - Use the untouched test set only for final evaluation.
 - Report negative or mixed findings honestly.
+
 
 
 

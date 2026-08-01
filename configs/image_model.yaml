@@ -1,4 +1,4 @@
-seed: 42
+﻿seed: 42
 
 image_model:
   architecture: resnet18
@@ -8,11 +8,14 @@ image_model:
   batch_size: 16
   learning_rate: 0.0001
   weight_decay: 0.0001
-  epochs: 10
-  early_stopping_patience: 3
+  epochs: 3
+  early_stopping_patience: 2
+  num_workers: 2
 
 paths:
-  train_csv: data/splits/train.csv
-  validation_csv: data/splits/validation.csv
-  test_csv: data/splits/test.csv
+  train_csv: data/debug_splits_available/train.csv
+  validation_csv: data/debug_splits_available/validation.csv
+  test_csv: data/debug_splits_available/test.csv
+  image_root: .
   checkpoint_dir: outputs/checkpoints/image_model
+  metrics_path: outputs/metrics/image_model_debug_metrics.json
