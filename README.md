@@ -151,13 +151,13 @@ data/debug_splits/validation.csv
 data/debug_splits/test.csv
 ```
 
-Download only the debug subset images:
+Download only the debug subset images and create image-available splits:
 
 ```bash
 python scripts/download_images.py --config configs/image_download.yaml
 ```
 
-Large image archives are intentionally avoided at the beginning. The first training check should use a small subset before scaling up.
+This also writes `data/debug_splits_available/` with only samples whose images downloaded successfully. Large image archives are intentionally avoided at the beginning. The first training check should use a small subset before scaling up.
 ## Colab Workflow
 
 After pushing changes to GitHub, run this in Colab:
@@ -188,5 +188,6 @@ pytest
 - Use validation data for model selection.
 - Use the untouched test set only for final evaluation.
 - Report negative or mixed findings honestly.
+
 
 

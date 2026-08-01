@@ -3,6 +3,7 @@
 images:
   splits_dir: data/debug_splits
   output_dir: data/images/fakeddit
+  available_splits_dir: data/debug_splits_available
   timeout_seconds: 15
   max_retries: 2
   verify_images: true

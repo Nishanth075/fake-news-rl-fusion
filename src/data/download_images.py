@@ -20,14 +20,19 @@ def download_split_images(config: dict[str, Any]) -> dict[str, Any]:
     image_config = config["images"]
     splits_dir = Path(image_config["splits_dir"])
     output_dir = Path(image_config["output_dir"])
+    available_splits_dir = Path(image_config.get("available_splits_dir", splits_dir))
     output_dir.mkdir(parents=True, exist_ok=True)
+    available_splits_dir.mkdir(parents=True, exist_ok=True)
 
     timeout = int(image_config.get("timeout_seconds", 15))
     max_retries = int(image_config.get("max_retries", 2))
     verify_images = bool(image_config.get("verify_images", True))
     headers = {"User-Agent": str(image_config.get("user_agent", "fake-news-rl-fusion"))}
 
-    stats: dict[str, Any] = {"splits": {}, "total": {"requested": 0, "downloaded": 0, "failed": 0}}
+    stats: dict[str, Any] = {
+        "splits": {},
+        "total": {"requested": 0, "downloaded": 0, "failed": 0, "available_rows": 0},
+    }
     for split_file in SPLIT_FILES:
         split_path = splits_dir / split_file
         if not split_path.exists():
@@ -37,6 +42,7 @@ def download_split_images(config: dict[str, Any]) -> dict[str, Any]:
             raise ValueError(f"{split_path} does not contain image_url. Re-run prepare_fakeddit first.")
 
         downloaded = 0
+        available_mask = []
         failed_rows = []
         for row in df.itertuples(index=False):
             sample_id = str(getattr(row, "sample_id"))
@@ -49,23 +55,32 @@ def download_split_images(config: dict[str, Any]) -> dict[str, Any]:
                 ok, reason = _verify_image(target_path)
             if ok:
                 downloaded += 1
+                available_mask.append(True)
             else:
+                available_mask.append(False)
                 failed_rows.append({"sample_id": sample_id, "image_url": image_url, "reason": reason})
+
+        available_df = df.loc[available_mask].copy().reset_index(drop=True)
+        available_df.to_csv(available_splits_dir / split_file, index=False)
 
         requested = int(len(df))
         failed = len(failed_rows)
+        available_rows = int(len(available_df))
         stats["splits"][split_file.replace(".csv", "")] = {
             "requested": requested,
             "downloaded": downloaded,
             "failed": failed,
+            "available_rows": available_rows,
+            "class_distribution": _label_counts(available_df),
         }
         stats["total"]["requested"] += requested
         stats["total"]["downloaded"] += downloaded
         stats["total"]["failed"] += failed
+        stats["total"]["available_rows"] += available_rows
         if failed_rows:
             pd.DataFrame(failed_rows).to_csv(splits_dir / f"{split_file}_image_failures.csv", index=False)
 
-    write_json(stats, splits_dir / "image_download_stats.json")
+    write_json(stats, available_splits_dir / "image_download_stats.json")
     return stats
 
 
@@ -119,3 +134,10 @@ def _verify_image(path: Path) -> tuple[bool, str]:
     except Exception as exc:  # Pillow raises several image-specific exceptions.
         path.unlink(missing_ok=True)
         return False, exc.__class__.__name__
+
+
+def _label_counts(df: pd.DataFrame) -> dict[str, int]:
+    if df.empty:
+        return {}
+    counts = df["label"].value_counts().sort_index()
+    return {str(int(label)): int(count) for label, count in counts.items()}
