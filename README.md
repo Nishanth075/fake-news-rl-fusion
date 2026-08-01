@@ -195,6 +195,28 @@ python scripts/infer_image_model.py --config configs/image_model.yaml --splits t
 ```
 
 This writes image probabilities, predictions and confidence values under `data/modality_outputs/`.
+
+## Stage 3 Text Model Smoke Test
+
+Verify the DistilBERT text branch with one train/evaluation batch:
+
+```bash
+python scripts/train_text_model.py --config configs/text_model.yaml --smoke-test
+```
+
+If the smoke test succeeds, run debug text training:
+
+```bash
+python scripts/train_text_model.py --config configs/text_model.yaml
+```
+
+Generate text-branch outputs for fusion experiments:
+
+```bash
+python scripts/infer_text_model.py --config configs/text_model.yaml --splits train validation test
+```
+
+This writes text probabilities, predictions and confidence values under `data/modality_outputs/`.
 ## Tests
 
 Run:
@@ -211,6 +233,7 @@ pytest
 - Use validation data for model selection.
 - Use the untouched test set only for final evaluation.
 - Report negative or mixed findings honestly.
+
 
 
 
