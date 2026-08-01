@@ -1,4 +1,4 @@
-seed: 42
+﻿seed: 42
 
 fusion:
   state_dim: 9
@@ -18,3 +18,5 @@ paths:
   validation_outputs: data/modality_outputs/validation_outputs.csv
   test_outputs: data/modality_outputs/test_outputs.csv
   checkpoint_dir: outputs/checkpoints/fusion
+  metrics_path: outputs/metrics/rl_fusion_debug_metrics.json
+  test_predictions_path: outputs/metrics/rl_fusion_test_predictions.csv

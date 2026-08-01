@@ -241,6 +241,16 @@ python scripts/evaluate_baselines.py --config configs/baselines.yaml
 ```
 
 Baseline metrics are saved under `outputs/metrics/`.
+
+## Stage 5 RL Adaptive Fusion
+
+Train the offline contextual-bandit fusion controller:
+
+```bash
+python scripts/train_rl_fusion.py --config configs/fusion.yaml
+```
+
+This trains only on `train_outputs.csv`, selects the best checkpoint using validation macro F1, and evaluates once on `test_outputs.csv`.
 ## Tests
 
 Run:
@@ -257,6 +267,7 @@ pytest
 - Use validation data for model selection.
 - Use the untouched test set only for final evaluation.
 - Report negative or mixed findings honestly.
+
 
 
 
