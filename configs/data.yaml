@@ -1,0 +1,35 @@
+seed: 42
+
+data:
+  source_csv: data/raw/dataset.csv
+  output_csv: data/processed/dataset.csv
+  image_root: .
+  splits_dir: data/splits
+  stats_path: outputs/metrics/dataset_stats.json
+
+  columns:
+    sample_id: sample_id
+    image_path: image_path
+    text: text
+    label: label
+
+  label_mapping:
+    real_values: [0, "0", "real", "true", "nonfake", "not_fake"]
+    fake_values: [1, "1", "fake", "false"]
+
+  split:
+    train: 0.70
+    validation: 0.15
+    test: 0.15
+
+  validation:
+    require_existing_images: false
+    min_text_chars: 1
+    remove_duplicate_text: true
+    remove_duplicate_image_paths: true
+
+debug:
+  enabled: false
+  train_size: 500
+  validation_size: 100
+  test_size: 100

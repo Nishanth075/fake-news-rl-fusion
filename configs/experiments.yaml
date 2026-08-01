@@ -1,0 +1,27 @@
+seeds: [42, 123, 2026]
+
+primary_metric: macro_f1
+
+baselines:
+  - image_only
+  - text_only
+  - equal_fusion
+  - confidence_weighted_fusion
+  - reliability_weighted_fusion
+
+ablations:
+  - name: probabilities_only
+    features: [image_probability, text_probability]
+  - name: prediction_confidence
+    features: [image_probability, image_confidence, text_probability, text_confidence]
+  - name: full_reliability_state
+    features:
+      - image_probability
+      - image_confidence
+      - image_quality
+      - text_probability
+      - text_confidence
+      - text_quality
+      - disagreement
+      - confidence_difference
+      - quality_difference
