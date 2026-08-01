@@ -1,0 +1,8 @@
+﻿seed: 42
+
+paths:
+  train_outputs: data/modality_outputs/train_outputs.csv
+  validation_outputs: data/modality_outputs/validation_outputs.csv
+  test_outputs: data/modality_outputs/test_outputs.csv
+  results_path: outputs/metrics/baseline_debug_results.csv
+  summary_path: outputs/metrics/baseline_debug_summary.json

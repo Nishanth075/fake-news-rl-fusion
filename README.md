@@ -217,6 +217,30 @@ python scripts/infer_text_model.py --config configs/text_model.yaml --splits tra
 ```
 
 This writes text probabilities, predictions and confidence values under `data/modality_outputs/`.
+
+## Stage 4 Reliability and Baselines
+
+Merge image/text predictions with image and text quality features:
+
+```bash
+python scripts/build_reliability_outputs.py --config configs/reliability.yaml
+```
+
+This writes:
+
+```text
+data/modality_outputs/train_outputs.csv
+data/modality_outputs/validation_outputs.csv
+data/modality_outputs/test_outputs.csv
+```
+
+Evaluate deterministic baselines:
+
+```bash
+python scripts/evaluate_baselines.py --config configs/baselines.yaml
+```
+
+Baseline metrics are saved under `outputs/metrics/`.
 ## Tests
 
 Run:
@@ -233,6 +257,7 @@ pytest
 - Use validation data for model selection.
 - Use the untouched test set only for final evaluation.
 - Report negative or mixed findings honestly.
+
 
 
 
