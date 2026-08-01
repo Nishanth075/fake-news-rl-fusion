@@ -1,4 +1,4 @@
-# fake-news-rl-fusion
+﻿# fake-news-rl-fusion
 
 Explainable fake-news detection using reinforcement-learning-based adaptive image-text fusion.
 
@@ -89,6 +89,51 @@ data/splits/test.csv
 outputs/metrics/dataset_stats.json
 ```
 
+
+## Fakeddit Metadata Conversion
+
+For the official Fakeddit v2 multimodal-only TSV files, download the metadata folder into:
+
+```text
+data/raw/fakeddit_v2/
+```
+
+Then run:
+
+```bash
+python scripts/prepare_fakeddit.py --config configs/fakeddit.yaml
+```
+
+Or:
+
+```bash
+python run_pipeline.py --prepare-fakeddit
+```
+
+This reads:
+
+```text
+data/raw/fakeddit_v2/multimodal_only_samples/multimodal_train.tsv
+data/raw/fakeddit_v2/multimodal_only_samples/multimodal_validate.tsv
+data/raw/fakeddit_v2/multimodal_only_samples/multimodal_test_public.tsv
+```
+
+It writes:
+
+```text
+data/processed/fakeddit_dataset.csv
+data/splits/train.csv
+data/splits/validation.csv
+data/splits/test.csv
+outputs/metrics/fakeddit_stats.json
+```
+
+Fakeddit's `2_way_label` is converted to this project's standard:
+
+```text
+Fakeddit 0 = False/Fake  -> project 1 = Fake
+Fakeddit 1 = True/Real   -> project 0 = Real
+```
 ## Colab Workflow
 
 After pushing changes to GitHub, run this in Colab:
@@ -119,3 +164,4 @@ pytest
 - Use validation data for model selection.
 - Use the untouched test set only for final evaluation.
 - Report negative or mixed findings honestly.
+

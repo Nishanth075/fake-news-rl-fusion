@@ -1,0 +1,23 @@
+﻿seed: 42
+
+fakeddit:
+  raw_dir: data/raw/fakeddit_v2/multimodal_only_samples
+  train_tsv: multimodal_train.tsv
+  validation_tsv: multimodal_validate.tsv
+  test_tsv: multimodal_test_public.tsv
+
+  output_csv: data/processed/fakeddit_dataset.csv
+  splits_dir: data/splits
+  stats_path: outputs/metrics/fakeddit_stats.json
+
+  image_output_dir: data/images/fakeddit
+  image_extension: .jpg
+
+  # Fakeddit 2_way_label uses 0=False/Fake and 1=True/Real.
+  # The project standard uses 0=Real and 1=Fake, so labels are inverted.
+  invert_2_way_label: true
+
+  validation:
+    min_text_chars: 1
+    remove_duplicate_text: false
+    remove_duplicate_image_paths: false
