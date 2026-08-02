@@ -1,0 +1,27 @@
+seed: 42
+
+paths:
+  test_outputs: data/dev_modality_outputs/test_outputs.csv
+  checkpoint_dir: outputs/checkpoints/dev_fusion
+  output_dir: outputs/robustness
+  summary_path: outputs/robustness/dev_robustness_summary.csv
+  details_path: outputs/robustness/dev_robustness_details.json
+
+fusion:
+  state_dim: 9
+  action_dim: 7
+  dropout: 0.1
+
+corruptions:
+  image_quality_drop:
+    modality: image
+    levels: [0.25, 0.50, 0.75]
+  text_quality_drop:
+    modality: text
+    levels: [0.25, 0.50, 0.75]
+  image_probability_noise:
+    modality: image
+    levels: [0.10, 0.20]
+  text_probability_noise:
+    modality: text
+    levels: [0.10, 0.20]

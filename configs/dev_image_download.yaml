@@ -1,0 +1,10 @@
+seed: 42
+
+images:
+  splits_dir: data/dev_splits
+  output_dir: data/images/fakeddit
+  available_splits_dir: data/dev_splits_available
+  timeout_seconds: 15
+  max_retries: 2
+  verify_images: true
+  user_agent: Mozilla/5.0 fake-news-rl-fusion research downloader

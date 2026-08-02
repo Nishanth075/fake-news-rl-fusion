@@ -1,0 +1,19 @@
+seed: 42
+
+reliability:
+  splits_dir: data/dev_splits_available
+  image_root: .
+  image_outputs_dir: data/dev_modality_outputs
+  text_outputs_dir: data/dev_modality_outputs
+  output_dir: data/dev_modality_outputs
+  metrics_path: outputs/metrics/dev_reliability_stats.json
+  text_length_target_words: 30
+  text_max_length: 128
+
+  image_quality:
+    blur_percentiles: [5, 95]
+    contrast_percentiles: [5, 95]
+    entropy_percentiles: [5, 95]
+    brightness_low: 40
+    brightness_high: 215
+    brightness_mid: 127.5

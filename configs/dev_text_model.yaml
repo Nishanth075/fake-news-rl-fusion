@@ -1,0 +1,20 @@
+seed: 42
+
+text_model:
+  architecture: distilbert-base-uncased
+  max_length: 128
+  batch_size: 16
+  learning_rate: 0.00002
+  weight_decay: 0.01
+  epochs: 3
+  early_stopping_patience: 2
+  num_workers: 0
+
+paths:
+  train_csv: data/dev_splits_available/train.csv
+  validation_csv: data/dev_splits_available/validation.csv
+  test_csv: data/dev_splits_available/test.csv
+  checkpoint_dir: outputs/checkpoints/dev_text_model
+  metrics_path: outputs/metrics/dev_text_model_metrics.json
+  outputs_dir: data/dev_modality_outputs
+  text_outputs_metrics_path: outputs/metrics/dev_text_outputs_metrics.json

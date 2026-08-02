@@ -288,6 +288,33 @@ python scripts/export_results.py --config configs/results_export.yaml
 ```
 
 This writes method comparison, stage status and summary files under `outputs/tables/`.
+
+## Stage 9 Development-Scale Run
+
+After the debug pipeline is complete, create a larger development subset without overwriting debug outputs:
+
+```bash
+python scripts/create_debug_subset.py --config configs/dev_subset.yaml
+python scripts/download_images.py --config configs/dev_image_download.yaml
+```
+
+Then run the model and fusion stages with the dev configs:
+
+```bash
+python scripts/train_image_model.py --config configs/dev_image_model.yaml
+python scripts/infer_image_model.py --config configs/dev_image_model.yaml --splits train validation test
+python scripts/train_text_model.py --config configs/dev_text_model.yaml
+python scripts/infer_text_model.py --config configs/dev_text_model.yaml --splits train validation test
+python scripts/build_reliability_outputs.py --config configs/dev_reliability.yaml
+python scripts/evaluate_baselines.py --config configs/dev_baselines.yaml
+python scripts/train_rl_fusion.py --config configs/dev_fusion.yaml
+python scripts/analyze_rl_policy.py --config configs/dev_rl_analysis.yaml
+python scripts/run_ablation.py --config configs/dev_ablation.yaml
+python scripts/run_robustness.py --config configs/dev_robustness.yaml
+python scripts/export_results.py --config configs/dev_results_export.yaml
+```
+
+The development run starts from a requested `5,000 / 1,000 / 1,000` split and writes separate outputs under `data/dev_modality_outputs`, `outputs/checkpoints/dev_*`, and `outputs/metrics/dev_*`.
 ## Tests
 
 Run:
@@ -304,6 +331,7 @@ pytest
 - Use validation data for model selection.
 - Use the untouched test set only for final evaluation.
 - Report negative or mixed findings honestly.
+
 
 
 
