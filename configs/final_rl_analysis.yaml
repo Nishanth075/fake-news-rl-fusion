@@ -1,0 +1,7 @@
+seed: 42
+
+paths:
+  test_outputs: data/final_modality_outputs/test_outputs.csv
+  predictions_path: outputs/metrics/final_rl_fusion_test_predictions.csv
+  analysis_path: outputs/metrics/final_rl_policy_analysis.json
+  action_details_path: outputs/metrics/final_rl_action_details.csv
