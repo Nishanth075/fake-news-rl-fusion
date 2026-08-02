@@ -1,0 +1,4 @@
+name,state_dim,features,best_validation_macro_f1,test_macro_f1,test_accuracy,test_roc_auc,average_image_weight,average_text_weight
+full_reliability_state,9,"image_probability,image_confidence,image_quality,text_probability,text_confidence,text_quality,disagreement,confidence_difference,quality_difference",0.8529093662124162,0.8472956925402138,0.8472958642629904,0.920934920934921,0.34512192010879517,0.6548780202865601
+prediction_confidence,4,"image_probability,image_confidence,text_probability,text_confidence",0.8496503998506841,0.841922531273591,0.8419936373276776,0.922010422010422,0.4784729778766632,0.5215270519256592
+probabilities_only,2,"image_probability,text_probability",0.848415689188472,0.834367681498829,0.8345705196182397,0.921015921015921,0.3907211124897003,0.6092788577079773

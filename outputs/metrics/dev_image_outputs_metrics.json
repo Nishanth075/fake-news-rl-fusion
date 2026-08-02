@@ -1,0 +1,74 @@
+{
+  "device": "cuda",
+  "splits": {
+    "test": {
+      "metrics": {
+        "accuracy": 0.7571580063626723,
+        "balanced_accuracy": 0.7582777582777582,
+        "confusion_matrix": [
+          [
+            376,
+            86
+          ],
+          [
+            143,
+            338
+          ]
+        ],
+        "macro_f1": 0.7567630279171664,
+        "precision_macro": 0.760819973097757,
+        "recall_macro": 0.7582777582777582,
+        "roc_auc": 0.8368073368073369,
+        "weighted_f1": 0.7565655386944135
+      },
+      "output_path": "data/dev_modality_outputs/test_image_outputs.csv",
+      "rows": 943
+    },
+    "train": {
+      "metrics": {
+        "accuracy": 0.8214285714285714,
+        "balanced_accuracy": 0.8229549744344111,
+        "confusion_matrix": [
+          [
+            2064,
+            239
+          ],
+          [
+            601,
+            1800
+          ]
+        ],
+        "macro_f1": 0.8208643426034731,
+        "precision_macro": 0.8286348658936848,
+        "recall_macro": 0.8229549744344111,
+        "roc_auc": 0.9061587451892149,
+        "weighted_f1": 0.8206548940244592
+      },
+      "output_path": "data/dev_modality_outputs/train_image_outputs.csv",
+      "rows": 4704
+    },
+    "validation": {
+      "metrics": {
+        "accuracy": 0.7510504201680672,
+        "balanced_accuracy": 0.7521629734263264,
+        "confusion_matrix": [
+          [
+            395,
+            75
+          ],
+          [
+            162,
+            320
+          ]
+        ],
+        "macro_f1": 0.7494956582755898,
+        "precision_macro": 0.7596413880871759,
+        "recall_macro": 0.7521629734263264,
+        "roc_auc": 0.8154056678732233,
+        "weighted_f1": 0.7492468963727934
+      },
+      "output_path": "data/dev_modality_outputs/validation_image_outputs.csv",
+      "rows": 952
+    }
+  }
+}

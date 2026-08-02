@@ -1,0 +1,80 @@
+{
+  "best_checkpoint_path": "outputs/checkpoints/dev_text_model/best_text_model.pt",
+  "best_validation_macro_f1": 0.8170201484623542,
+  "device": "cuda",
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.470234485659875,
+      "validation_loss": 0.40505006170573354,
+      "validation_metrics": {
+        "accuracy": 0.8140756302521008,
+        "balanced_accuracy": 0.8144301227156352,
+        "confusion_matrix": [
+          [
+            396,
+            74
+          ],
+          [
+            103,
+            379
+          ]
+        ],
+        "macro_f1": 0.8140163242330425,
+        "precision_macro": 0.8151158829800882,
+        "recall_macro": 0.8144301227156352,
+        "roc_auc": 0.8973911891939614,
+        "weighted_f1": 0.8139744611607661
+      }
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.29324571029314783,
+      "validation_loss": 0.40642070244340334,
+      "validation_metrics": {
+        "accuracy": 0.8172268907563025,
+        "balanced_accuracy": 0.8177805244107001,
+        "confusion_matrix": [
+          [
+            405,
+            65
+          ],
+          [
+            109,
+            373
+          ]
+        ],
+        "macro_f1": 0.8170201484623542,
+        "precision_macro": 0.8197679583533216,
+        "recall_macro": 0.8177805244107001,
+        "roc_auc": 0.9061843383067008,
+        "weighted_f1": 0.8169426201021235
+      }
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.13993675320656324,
+      "validation_loss": 0.5755712973470447,
+      "validation_metrics": {
+        "accuracy": 0.7993697478991597,
+        "balanced_accuracy": 0.8005694358612165,
+        "confusion_matrix": [
+          [
+            421,
+            49
+          ],
+          [
+            142,
+            340
+          ]
+        ],
+        "macro_f1": 0.7979067355900519,
+        "precision_macro": 0.8109078705246864,
+        "recall_macro": 0.8005694358612165,
+        "roc_auc": 0.8928180453782996,
+        "weighted_f1": 0.7976899930257396
+      }
+    }
+  ],
+  "smoke_test": false
+}

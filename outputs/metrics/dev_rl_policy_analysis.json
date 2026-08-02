@@ -1,0 +1,104 @@
+{
+  "action_distribution": {
+    "0": 44,
+    "1": 160,
+    "3": 219,
+    "4": 2,
+    "5": 25,
+    "6": 493
+  },
+  "agreement": {
+    "False": {
+      "average_image_weight": 0.3316363636363637,
+      "average_text_weight": 0.6683636363636363,
+      "macro_f1": 0.686890045543266,
+      "rows": 275
+    },
+    "True": {
+      "average_image_weight": 0.35067365269461076,
+      "average_text_weight": 0.6493263473053893,
+      "macro_f1": 0.9097882454624028,
+      "rows": 668
+    }
+  },
+  "by_image_quality_group": {
+    "high": {
+      "average_image_weight": 0.3925115207373271,
+      "average_text_weight": 0.6074884792626728,
+      "macro_f1": 0.840300775937925,
+      "rows": 434
+    },
+    "low": {
+      "average_image_weight": 0.21521739130434775,
+      "average_text_weight": 0.7847826086956522,
+      "macro_f1": 0.9551656920077972,
+      "rows": 23
+    },
+    "medium": {
+      "average_image_weight": 0.30895061728395057,
+      "average_text_weight": 0.6910493827160494,
+      "macro_f1": 0.8473644003055767,
+      "rows": 486
+    }
+  },
+  "by_label": {
+    "0": {
+      "average_image_weight": 0.25963203463203466,
+      "average_text_weight": 0.7403679653679656,
+      "macro_f1": null,
+      "rows": 462
+    },
+    "1": {
+      "average_image_weight": 0.42723492723492723,
+      "average_text_weight": 0.5727650727650727,
+      "macro_f1": null,
+      "rows": 481
+    }
+  },
+  "by_text_quality_group": {
+    "high": {
+      "average_image_weight": 0.34512195121951217,
+      "average_text_weight": 0.6548780487804878,
+      "macro_f1": 0.8472956925402138,
+      "rows": 943
+    }
+  },
+  "details_path": "outputs/metrics/dev_rl_action_details.csv",
+  "oracle_action_upper_bound": {
+    "action_distribution": {
+      "0": 519,
+      "1": 58,
+      "2": 74,
+      "3": 42,
+      "4": 27,
+      "5": 21,
+      "6": 202
+    },
+    "metrics": {
+      "accuracy": 0.9289501590668081,
+      "balanced_accuracy": 0.9296266796266797,
+      "confusion_matrix": [
+        [
+          445,
+          17
+        ],
+        [
+          50,
+          431
+        ]
+      ],
+      "macro_f1": 0.9289344954687742,
+      "precision_macro": 0.9305217352092352,
+      "recall_macro": 0.9296266796266797,
+      "roc_auc": 0.9371889371889373,
+      "weighted_f1": 0.928913237728585
+    }
+  },
+  "rows": 943,
+  "weight_summary": {
+    "average_image_weight": 0.34512195121951217,
+    "average_text_weight": 0.6548780487804878,
+    "image_weight_std": 0.2817957883965209,
+    "text_weight_std": 0.28179578839652186
+  }
+}
