@@ -43,6 +43,7 @@ def train_rl_fusion(config: dict[str, Any]) -> dict[str, Any]:
         state_dim=int(fusion_config.get("state_dim", len(feature_columns or []))),
         action_dim=len(action_weights),
         dropout=float(fusion_config.get("dropout", 0.1)),
+        hidden_dims=fusion_config.get("hidden_dims"),
     ).to(device)
     model.feature_columns = feature_columns
     model.action_weights = action_weights
@@ -75,7 +76,7 @@ def train_rl_fusion(config: dict[str, Any]) -> dict[str, Any]:
             "train_loss": train_loss,
             "train_mean_reward": train_reward,
             "validation_metrics": validation_metrics,
-            "action_distribution": _action_distribution(validation_predictions["selected_action"].to_numpy()),
+            "action_distribution": _action_distribution(validation_predictions["selected_action"].to_numpy(), len(action_weights)),
             "average_image_weight": float(validation_predictions["image_weight"].mean()),
             "average_text_weight": float(validation_predictions["text_weight"].mean()),
         }
@@ -124,8 +125,10 @@ def evaluate_rl_fusion(config: dict[str, Any], split: str = "test") -> dict[str,
         state_dim=int(config["fusion"].get("state_dim", len(feature_columns or []))),
         action_dim=len(action_weights),
         dropout=float(config["fusion"].get("dropout", 0.1)),
+        hidden_dims=config["fusion"].get("hidden_dims"),
     ).to(device)
     model.feature_columns = feature_columns
+    model.action_weights = action_weights
     model.load_state_dict(checkpoint["model_state_dict"])
     predictions = predict_with_model(model, df, device)
     metrics = binary_classification_metrics(df["label"].to_numpy(), predictions["final_probability"].to_numpy())
@@ -137,7 +140,7 @@ def evaluate_rl_fusion(config: dict[str, Any], split: str = "test") -> dict[str,
         "split": split,
         "rows": int(len(predictions)),
         "metrics": metrics,
-        "action_distribution": _action_distribution(predictions["selected_action"].to_numpy()),
+        "action_distribution": _action_distribution(predictions["selected_action"].to_numpy(), len(action_weights)),
         "average_image_weight": float(predictions["image_weight"].mean()),
         "average_text_weight": float(predictions["text_weight"].mean()),
         "predictions_path": str(output_path),
@@ -232,8 +235,10 @@ def _linear_epsilon(epoch: int, epochs: int, start: float, end: float) -> float:
     return float(start + progress * (end - start))
 
 
-def _action_distribution(actions: np.ndarray) -> dict[str, int]:
-    return {str(index): int((actions == index).sum()) for index in range(len(FUSION_ACTIONS))}
+def _action_distribution(actions: np.ndarray, action_count: int | None = None) -> dict[str, int]:
+    max_action = int(actions.max()) + 1 if len(actions) else 0
+    count = action_count or max(len(FUSION_ACTIONS), max_action)
+    return {str(index): int((actions == index).sum()) for index in range(count)}
 
 
 
