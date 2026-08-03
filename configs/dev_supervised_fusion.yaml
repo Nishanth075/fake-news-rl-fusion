@@ -1,0 +1,18 @@
+seed: 42
+
+supervised_fusion:
+  state_dim: 9
+  hidden_dims: [64, 32]
+  dropout: 0.1
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  batch_size: 64
+  epochs: 30
+
+paths:
+  train_outputs: data/dev_modality_outputs/train_outputs.csv
+  validation_outputs: data/dev_modality_outputs/validation_outputs.csv
+  test_outputs: data/dev_modality_outputs/test_outputs.csv
+  checkpoint_dir: outputs/checkpoints/dev_supervised_fusion
+  metrics_path: outputs/metrics/dev_supervised_fusion_metrics.json
+  test_predictions_path: outputs/metrics/dev_supervised_fusion_test_predictions.csv

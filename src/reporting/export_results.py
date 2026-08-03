@@ -27,6 +27,7 @@ def export_debug_results(config: dict[str, Any]) -> dict[str, Any]:
     method_rows = []
     method_rows.extend(_baseline_rows(inputs.get("baseline_results")))
     method_rows.extend(_rl_rows(inputs.get("rl_metrics")))
+    method_rows.extend(_supervised_fusion_rows(inputs.get("supervised_fusion_metrics")))
     method_rows.extend(_ablation_rows(inputs.get("ablation_summary")))
     method_table = pd.DataFrame(method_rows)
     if not method_table.empty:
@@ -82,6 +83,26 @@ def _rl_rows(path_value: str | None) -> list[dict[str, Any]]:
     ]
 
 
+def _supervised_fusion_rows(path_value: str | None) -> list[dict[str, Any]]:
+    if not path_value or not Path(path_value).exists():
+        return []
+    data = _read_json(path_value)
+    test = data.get("test", {})
+    metrics = test.get("metrics", {})
+    if not metrics:
+        return []
+    return [
+        {
+            "source": "supervised_fusion",
+            "split": test.get("split", "test"),
+            "method": "supervised_mlp_fusion",
+            "macro_f1": metrics.get("macro_f1"),
+            "accuracy": metrics.get("accuracy"),
+            "roc_auc": metrics.get("roc_auc"),
+        }
+    ]
+
+
 def _ablation_rows(path_value: str | None) -> list[dict[str, Any]]:
     if not path_value or not Path(path_value).exists():
         return []
@@ -106,6 +127,7 @@ def _stage_status_rows(inputs: dict[str, str]) -> list[dict[str, Any]]:
         "text_branch": ["text_metrics"],
         "baselines": ["baseline_results"],
         "rl_fusion": ["rl_metrics", "rl_policy_analysis"],
+        "supervised_fusion": ["supervised_fusion_metrics"],
         "ablation": ["ablation_summary"],
         "robustness": ["robustness_summary"],
     }
@@ -114,7 +136,7 @@ def _stage_status_rows(inputs: dict[str, str]) -> list[dict[str, Any]]:
         rows.append(
             {
                 "stage": stage,
-                "complete": all(Path(inputs[key]).exists() for key in keys),
+                "complete": all(key in inputs and Path(inputs[key]).exists() for key in keys),
                 "required_files": ";".join(keys),
             }
         )
@@ -163,4 +185,6 @@ def _robustness_summary(path_value: str | None) -> list[dict[str, Any]]:
 def _read_json(path_value: str | Path) -> dict[str, Any]:
     with Path(path_value).open("r", encoding="utf-8") as handle:
         return json.load(handle)
+
+
 
