@@ -1,0 +1,199 @@
+{
+  "aggregate": {
+    "baseline_macro_f1": 0.8673332160630083,
+    "delta_macro_f1_mean": -0.007977364802161787,
+    "delta_macro_f1_std": 0.007185796876341226,
+    "mcnemar_p_value_max": 1.0,
+    "mcnemar_p_value_min": 9.176460450517718e-05,
+    "num_seeds": 3,
+    "rl_macro_f1_mean": 0.8593558512608466,
+    "rl_macro_f1_std": 0.007185796876341226
+  },
+  "baseline_method": "equal_fusion",
+  "baseline_metrics": {
+    "accuracy": 0.8674603174603175,
+    "balanced_accuracy": 0.8679933272182967,
+    "confusion_matrix": [
+      [
+        1698,
+        168
+      ],
+      [
+        333,
+        1581
+      ]
+    ],
+    "macro_f1": 0.8673332160630083,
+    "precision_macro": 0.8699932352143829,
+    "recall_macro": 0.8679933272182967,
+    "roc_auc": 0.9325416824862439,
+    "weighted_f1": 0.8672810719000096
+  },
+  "seeds": {
+    "13": {
+      "mcnemar": {
+        "b": 43,
+        "c": 86,
+        "discordant": 129,
+        "p_value": 0.00019194241357169099
+      },
+      "rl_metrics": {
+        "accuracy": 0.8560846560846561,
+        "balanced_accuracy": 0.8565116740080705,
+        "confusion_matrix": [
+          [
+            1661,
+            205
+          ],
+          [
+            339,
+            1575
+          ]
+        ],
+        "macro_f1": 0.8560101236579725,
+        "precision_macro": 0.8576657303370787,
+        "recall_macro": 0.8565116740080705,
+        "roc_auc": 0.9081492942508576,
+        "weighted_f1": 0.8559685241640096
+      },
+      "run_config": {
+        "fusion": {
+          "action_dim": 7,
+          "batch_size": 64,
+          "dropout": 0.1,
+          "epochs": 50,
+          "epsilon_end": 0.05,
+          "epsilon_start": 1.0,
+          "hidden_dims": [
+            64,
+            32
+          ],
+          "learning_rate": 0.001,
+          "reward_correct": 1.0,
+          "reward_incorrect": -1.0,
+          "state_dim": 9
+        },
+        "paths": {
+          "checkpoint_dir": "outputs/metrics/seed_significance/checkpoints_seed_13",
+          "metrics_path": "outputs/metrics/seed_significance/rl_seed_13_metrics.json",
+          "test_outputs": "data/final_modality_outputs/test_outputs.csv",
+          "test_predictions_path": "outputs/metrics/seed_significance/rl_seed_13_test_predictions.csv",
+          "train_outputs": "data/final_modality_outputs/train_outputs.csv",
+          "validation_outputs": "data/final_modality_outputs/validation_outputs.csv",
+          "validation_predictions_path": "outputs/metrics/seed_significance/rl_seed_13_validation_predictions.csv"
+        },
+        "seed": 13
+      }
+    },
+    "42": {
+      "mcnemar": {
+        "b": 2,
+        "c": 1,
+        "discordant": 3,
+        "p_value": 1.0
+      },
+      "rl_metrics": {
+        "accuracy": 0.8677248677248677,
+        "balanced_accuracy": 0.8682478404177041,
+        "confusion_matrix": [
+          [
+            1697,
+            169
+          ],
+          [
+            331,
+            1583
+          ]
+        ],
+        "macro_f1": 0.8676044474818365,
+        "precision_macro": 0.8701619113236605,
+        "recall_macro": 0.8682478404177041,
+        "roc_auc": 0.9328939130746426,
+        "weighted_f1": 0.8675537442216129
+      },
+      "run_config": {
+        "fusion": {
+          "action_dim": 7,
+          "batch_size": 64,
+          "dropout": 0.1,
+          "epochs": 50,
+          "epsilon_end": 0.05,
+          "epsilon_start": 1.0,
+          "hidden_dims": [
+            64,
+            32
+          ],
+          "learning_rate": 0.001,
+          "reward_correct": 1.0,
+          "reward_incorrect": -1.0,
+          "state_dim": 9
+        },
+        "paths": {
+          "checkpoint_dir": "outputs/metrics/seed_significance/checkpoints_seed_42",
+          "metrics_path": "outputs/metrics/seed_significance/rl_seed_42_metrics.json",
+          "test_outputs": "data/final_modality_outputs/test_outputs.csv",
+          "test_predictions_path": "outputs/metrics/seed_significance/rl_seed_42_test_predictions.csv",
+          "train_outputs": "data/final_modality_outputs/train_outputs.csv",
+          "validation_outputs": "data/final_modality_outputs/validation_outputs.csv",
+          "validation_predictions_path": "outputs/metrics/seed_significance/rl_seed_42_validation_predictions.csv"
+        },
+        "seed": 42
+      }
+    },
+    "7": {
+      "mcnemar": {
+        "b": 52,
+        "c": 101,
+        "discordant": 153,
+        "p_value": 9.176460450517718e-05
+      },
+      "rl_metrics": {
+        "accuracy": 0.8544973544973545,
+        "balanced_accuracy": 0.8548569182231451,
+        "confusion_matrix": [
+          [
+            1648,
+            218
+          ],
+          [
+            332,
+            1582
+          ]
+        ],
+        "macro_f1": 0.8544529826427305,
+        "precision_macro": 0.8556060606060607,
+        "recall_macro": 0.8548569182231451,
+        "roc_auc": 0.9150057510463321,
+        "weighted_f1": 0.8544207122030041
+      },
+      "run_config": {
+        "fusion": {
+          "action_dim": 7,
+          "batch_size": 64,
+          "dropout": 0.1,
+          "epochs": 50,
+          "epsilon_end": 0.05,
+          "epsilon_start": 1.0,
+          "hidden_dims": [
+            64,
+            32
+          ],
+          "learning_rate": 0.001,
+          "reward_correct": 1.0,
+          "reward_incorrect": -1.0,
+          "state_dim": 9
+        },
+        "paths": {
+          "checkpoint_dir": "outputs/metrics/seed_significance/checkpoints_seed_7",
+          "metrics_path": "outputs/metrics/seed_significance/rl_seed_7_metrics.json",
+          "test_outputs": "data/final_modality_outputs/test_outputs.csv",
+          "test_predictions_path": "outputs/metrics/seed_significance/rl_seed_7_test_predictions.csv",
+          "train_outputs": "data/final_modality_outputs/train_outputs.csv",
+          "validation_outputs": "data/final_modality_outputs/validation_outputs.csv",
+          "validation_predictions_path": "outputs/metrics/seed_significance/rl_seed_7_validation_predictions.csv"
+        },
+        "seed": 7
+      }
+    }
+  }
+}
