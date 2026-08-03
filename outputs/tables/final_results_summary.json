@@ -8,9 +8,13 @@
     "rl_metrics": "outputs/metrics/final_rl_fusion_metrics.json",
     "rl_policy_analysis": "outputs/metrics/final_rl_policy_analysis.json",
     "robustness_summary": "outputs/robustness/final_robustness_summary.csv",
+    "seed_significance_details": "outputs/metrics/final_seed_significance_details.json",
+    "seed_significance_summary": "outputs/metrics/final_seed_significance_summary.csv",
+    "supervised_fusion_matched_metrics": "outputs/metrics/final_supervised_fusion_matched_metrics.json",
     "supervised_fusion_metrics": "outputs/metrics/final_supervised_fusion_metrics.json",
     "text_metrics": "outputs/metrics/final_text_outputs_metrics.json",
-    "threshold_tuning": "outputs/metrics/final_threshold_tuning_metrics.json"
+    "threshold_tuning": "outputs/metrics/final_threshold_tuning_metrics.json",
+    "threshold_tuning_matched": "outputs/metrics/final_threshold_tuning_matched_metrics.json"
   },
   "dataset_summary": {
     "class_distribution": {
