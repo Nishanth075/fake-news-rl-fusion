@@ -4,7 +4,7 @@ image_branch,True,image_metrics
 text_branch,True,text_metrics
 baselines,True,baseline_results
 rl_fusion,True,rl_metrics;rl_policy_analysis
-supervised_fusion,False,supervised_fusion_metrics
-threshold_tuning,False,threshold_tuning
+supervised_fusion,True,supervised_fusion_metrics
+threshold_tuning,True,threshold_tuning
 ablation,True,ablation_summary
 robustness,True,robustness_summary

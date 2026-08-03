@@ -18,6 +18,8 @@ def test_export_debug_results_collects_tables(tmp_path) -> None:
     _write_json(metrics / "image_outputs.json", {"splits": {}})
     _write_json(metrics / "text_outputs.json", {"splits": {}})
     _write_json(metrics / "rl.json", {"test": {"split": "test", "metrics": {"macro_f1": 0.7, "accuracy": 0.8, "roc_auc": 0.9}}})
+    _write_json(metrics / "supervised.json", {"test": {"split": "test", "metrics": {"macro_f1": 0.65, "accuracy": 0.7, "roc_auc": 0.8}}})
+    _write_json(metrics / "threshold.json", {"rows": []})
     _write_json(
         metrics / "policy.json",
         {
@@ -70,6 +72,8 @@ def test_export_debug_results_collects_tables(tmp_path) -> None:
                 "baseline_results": str(metrics / "baseline.csv"),
                 "rl_metrics": str(metrics / "rl.json"),
                 "rl_policy_analysis": str(metrics / "policy.json"),
+                "supervised_fusion_metrics": str(metrics / "supervised.json"),
+                "threshold_tuning": str(metrics / "threshold.json"),
                 "ablation_summary": str(metrics / "ablation.csv"),
                 "robustness_summary": str(robustness / "summary.csv"),
                 "image_download_stats": str(tmp_path / "image_download.json"),
@@ -79,7 +83,10 @@ def test_export_debug_results_collects_tables(tmp_path) -> None:
 
     methods = pd.read_csv(result["method_table_csv"])
     assert (tables / "summary.json").exists()
-    assert len(methods) == 3
+    stages = pd.read_csv(result["stage_status_csv"])
+    assert len(methods) == 4
+    assert stages.set_index("stage").loc["supervised_fusion", "complete"]
+    assert stages.set_index("stage").loc["threshold_tuning", "complete"]
     assert "dataset_summary" in result
 
 

@@ -13,6 +13,8 @@ inputs:
   baseline_results: outputs/metrics/final_baseline_results.csv
   rl_metrics: outputs/metrics/final_rl_fusion_metrics.json
   rl_policy_analysis: outputs/metrics/final_rl_policy_analysis.json
+  supervised_fusion_metrics: outputs/metrics/final_supervised_fusion_metrics.json
+  threshold_tuning: outputs/metrics/final_threshold_tuning_metrics.json
   ablation_summary: outputs/metrics/final_ablation_summary.csv
   robustness_summary: outputs/robustness/final_robustness_summary.csv
   image_download_stats: data/final_splits_available/image_download_stats.json

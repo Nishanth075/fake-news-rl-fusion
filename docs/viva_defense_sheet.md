@@ -18,7 +18,7 @@ This research proposes an explainable fake-news detection framework for multimod
 
 **Answer:** The fusion task can be formulated as an action-selection problem: for each sample, the agent observes reliability features and selects a fusion weight action. The reward is based on whether the fused prediction is correct. This makes the fusion decision explicit and interpretable.
 
-**Evidence:** Supervised MLP fusion reached only `0.8510` tuned macro F1, while RL adaptive fusion reached `0.8685` tuned macro F1. This shows that a generic trainable fusion model was not enough in this experiment.
+**Evidence and caveat:** The first supervised MLP fusion result reached `0.8510` tuned macro F1, while RL adaptive fusion reached `0.8685` tuned macro F1. However, this comparison used different training budgets, so I should not overclaim from it. A matched-budget supervised MLP config is included for a fair rerun, and the main defended comparison remains RL against deterministic fusion baselines plus the ablation and policy analysis.
 
 ## Baseline Comparison
 
@@ -114,6 +114,30 @@ Missing images were not synthetically filled; unavailable images were excluded f
 
 **Answer:** The original Fakeddit two-way label was converted into the project standard: `0 = Real`, `1 = Fake`. This conversion is recorded in `outputs/metrics/fakeddit_stats.json`.
 
+## Text Branch Overfitting
+
+**Question:** The text branch has high train performance and lower test performance. Is it overfitting?
+
+**Answer:** Yes, the text branch shows an overfitting gap: train macro F1 is around `0.988`, while test macro F1 is around `0.839`. This is not hidden; it is visible in the final metrics. The checkpoint was selected using validation performance, not training performance, so the final test result is still a held-out evaluation. A stronger future version should use more aggressive regularization, fewer epochs, or validation-loss early stopping for the text branch.
+
+## Reward Design
+
+**Question:** Why is the RL reward only correct/incorrect?
+
+**Answer:** I used a simple binary reward to make the fusion policy directly optimize classification correctness and keep the action interpretation clear. A limitation is that it does not distinguish a confident correct prediction from a marginal one. A future improvement is a margin-based or log-loss-based reward that also encourages calibration.
+
+## Quality Heuristic Validation
+
+**Question:** How do you know the quality features are meaningful?
+
+**Answer:** The image quality features are hand-designed proxies using blur, contrast, entropy, and related statistics. They are reasonable but not perfect. The policy analysis gives partial support: low image-quality samples had lower macro F1 (`0.8394`) than high-quality samples (`0.8652`). I should present these as heuristic reliability features, not as ground-truth quality labels.
+
+## Action Space
+
+**Question:** Why only seven fixed fusion actions?
+
+**Answer:** The discrete action space is a simplicity-versus-expressiveness tradeoff. Seven actions make the policy interpretable because each action maps to a clear image/text weight pair. A continuous policy or finer action grid may improve performance, but would be less simple to explain and was left as future work.
+
 ## Complexity
 
 **Question:** Did the adaptive fusion make the system too complex?
@@ -135,6 +159,14 @@ Missing images were not synthetically filled; unavailable images were excluded f
 **Question:** If the improvement is small, why is the work useful?
 
 **Answer:** The baseline fusion methods are already strong because image and text predictions are highly complementary. The RL model still performs slightly better, but the bigger contribution is that it gives an adaptive, inspectable decision process. It tells us not only the final label, but also how modality trust changed for each sample.
+
+**Important limitation:** The raw RL edge over equal fusion is very small (`0.8676` vs `0.8673`). Therefore, I should describe it as competitive/slightly improved, and strengthen the claim with multi-seed runs and paired significance testing rather than relying on a single-seed headline.
+
+## Single-Seed Limitation
+
+**Question:** Are the results statistically reliable?
+
+**Answer:** The current committed final run is seed `42`, so it is a single-seed result. That is a limitation. To address this, I added a multi-seed comparison script that reruns RL fusion over multiple seeds and compares it with equal fusion using an exact McNemar test on paired test predictions. If time allows before final defense, I will report mean plus/minus standard deviation and the paired p-values.
 
 ## Best Final Claim
 

@@ -8,7 +8,9 @@
     "rl_metrics": "outputs/metrics/final_rl_fusion_metrics.json",
     "rl_policy_analysis": "outputs/metrics/final_rl_policy_analysis.json",
     "robustness_summary": "outputs/robustness/final_robustness_summary.csv",
-    "text_metrics": "outputs/metrics/final_text_outputs_metrics.json"
+    "supervised_fusion_metrics": "outputs/metrics/final_supervised_fusion_metrics.json",
+    "text_metrics": "outputs/metrics/final_text_outputs_metrics.json",
+    "threshold_tuning": "outputs/metrics/final_threshold_tuning_metrics.json"
   },
   "dataset_summary": {
     "class_distribution": {

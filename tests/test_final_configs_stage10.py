@@ -17,6 +17,9 @@ FINAL_CONFIGS = [
     "configs/final_rl_analysis.yaml",
     "configs/final_robustness.yaml",
     "configs/final_results_export.yaml",
+    "configs/final_supervised_fusion_matched.yaml",
+    "configs/final_seed_significance.yaml",
+    "configs/final_threshold_tuning_matched.yaml",
 ]
 
 

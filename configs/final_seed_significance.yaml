@@ -1,0 +1,9 @@
+seed: 42
+
+comparison:
+  seeds: [42, 7, 13]
+  baseline_method: equal_fusion
+  base_rl_config: configs/final_fusion.yaml
+  output_dir: outputs/metrics/seed_significance
+  summary_path: outputs/metrics/final_seed_significance_summary.csv
+  details_path: outputs/metrics/final_seed_significance_details.json
