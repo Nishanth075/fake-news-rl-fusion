@@ -166,17 +166,23 @@ Missing images were not synthetically filled; unavailable images were excluded f
 
 **Question:** Are the results statistically reliable?
 
-**Answer:** The current committed final run is seed `42`, so it is a single-seed result. That is a limitation. To address this, I added a multi-seed comparison script that reruns RL fusion over multiple seeds and compares it with equal fusion using an exact McNemar test on paired test predictions. If time allows before final defense, I will report mean plus/minus standard deviation and the paired p-values.
+**Answer:** The original final run at seed `42` gave a small RL advantage over equal fusion, but the follow-up multi-seed check showed that this advantage is not stable across seeds. Across seeds `42`, `7`, and `13`, RL macro F1 was `0.8676`, `0.8545`, and `0.8560`, giving mean `0.8594 +/- 0.0072`, while equal fusion stayed at `0.8673`. Therefore, I should not claim statistically robust superiority. The honest conclusion is that the RL policy provides adaptive and explainable fusion behavior, but its training stability needs improvement.
 
 ## Best Final Claim
 
 Use this wording:
 
-> The proposed RL-based adaptive fusion framework achieved competitive and slightly improved macro F1 compared with fixed fusion baselines, while adding sample-level interpretability through fusion actions, modality weights, Grad-CAM image explanations, and text token saliency. Ablation confirms that reliability-aware state features improve the learned fusion policy.
+> The proposed RL-based adaptive fusion framework demonstrates sample-level adaptive and explainable image-text fusion through learned actions, modality weights, Grad-CAM image explanations, and text token saliency. In the best seed it slightly improves over fixed fusion, but multi-seed evaluation shows the performance gain is not yet statistically stable. Therefore, the strongest contribution is explainable adaptive fusion behavior, with training stability identified as a limitation and future improvement.
 
 Avoid this wording:
 
 > The model dramatically outperforms all baselines.
+
+Also avoid this wording:
+
+> The RL model is statistically proven to outperform equal fusion.
+
+The multi-seed result does not support that claim.
 
 That is too strong for the final numbers.
 
