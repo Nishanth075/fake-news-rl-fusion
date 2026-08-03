@@ -8,6 +8,7 @@ import pandas as pd
 import torch
 
 from src.evaluation.metrics import binary_classification_metrics
+from src.fusion.actions import resolve_fusion_actions
 from src.fusion.q_network import FusionQNetwork
 from src.fusion.train import predict_with_model
 from src.utils.device import get_device
@@ -59,12 +60,18 @@ def _load_model(config: dict[str, Any], device: torch.device) -> FusionQNetwork:
     if not checkpoint_path.exists():
         raise FileNotFoundError(f"Fusion checkpoint not found: {checkpoint_path}")
     checkpoint = torch.load(checkpoint_path, map_location=device)
+    model_config = checkpoint.get("config", config)
+    fusion_config = model_config["fusion"]
+    feature_columns = fusion_config.get("features")
+    action_weights = resolve_fusion_actions(model_config)
     model = FusionQNetwork(
-        state_dim=int(config["fusion"]["state_dim"]),
-        action_dim=int(config["fusion"]["action_dim"]),
-        dropout=float(config["fusion"].get("dropout", 0.1)),
+        state_dim=int(fusion_config.get("state_dim", len(feature_columns or []))),
+        action_dim=len(action_weights),
+        dropout=float(fusion_config.get("dropout", 0.1)),
+        hidden_dims=fusion_config.get("hidden_dims"),
     ).to(device)
-    model.feature_columns = config["fusion"].get("features")
+    model.feature_columns = feature_columns
+    model.action_weights = action_weights
     model.load_state_dict(checkpoint["model_state_dict"])
     model.eval()
     return model

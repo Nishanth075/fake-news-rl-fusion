@@ -13,10 +13,13 @@ class FusionQNetwork(nn.Module):
         hidden_dims: list[int] | None = None,
     ) -> None:
         super().__init__()
-        dims = [state_dim, *(hidden_dims or [64, 32]), action_dim]
+        hidden = hidden_dims or [64, 32]
+        dims = [state_dim, *hidden, action_dim]
         layers: list[nn.Module] = []
-        for input_dim, output_dim in zip(dims[:-2], dims[1:-1]):
-            layers.extend([nn.Linear(input_dim, output_dim), nn.ReLU(), nn.Dropout(dropout)])
+        for layer_index, (input_dim, output_dim) in enumerate(zip(dims[:-2], dims[1:-1])):
+            layers.extend([nn.Linear(input_dim, output_dim), nn.ReLU()])
+            if layer_index == 0:
+                layers.append(nn.Dropout(dropout))
         layers.append(nn.Linear(dims[-2], dims[-1]))
         self.network = nn.Sequential(*layers)
 
