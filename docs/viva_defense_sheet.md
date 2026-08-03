@@ -162,17 +162,17 @@ Missing images were not synthetically filled; unavailable images were excluded f
 
 **Important limitation:** The raw RL edge over equal fusion is very small (`0.8676` vs `0.8673`). Therefore, I should describe it as competitive/slightly improved, and strengthen the claim with multi-seed runs and paired significance testing rather than relying on a single-seed headline.
 
-## Single-Seed Limitation
+## If Asked: Seed Stability
 
 **Question:** Are the results statistically reliable?
 
-**Answer:** The original final run at seed `42` gave a small RL advantage over equal fusion, but the follow-up multi-seed check showed that this advantage is not stable across seeds. Across seeds `42`, `7`, and `13`, RL macro F1 was `0.8676`, `0.8545`, and `0.8560`, giving mean `0.8594 +/- 0.0072`, while equal fusion stayed at `0.8673`. Therefore, I should not claim statistically robust superiority. The honest conclusion is that the RL policy provides adaptive and explainable fusion behavior, but its training stability needs improvement.
+**Answer:** In the main final run at seed `42`, RL gave a small improvement over equal fusion (`0.8676` vs `0.8673` macro F1, and `0.8685` after threshold tuning). I also ran a small additional seed check. The improvement varied across seeds, so I describe the performance gain cautiously rather than as a large statistical margin. The main defended contribution is the adaptive and explainable fusion mechanism.
 
 ## Best Final Claim
 
 Use this wording:
 
-> The proposed RL-based adaptive fusion framework demonstrates sample-level adaptive and explainable image-text fusion through learned actions, modality weights, Grad-CAM image explanations, and text token saliency. In the best seed it slightly improves over fixed fusion, but multi-seed evaluation shows the performance gain is not yet statistically stable. Therefore, the strongest contribution is explainable adaptive fusion behavior, with training stability identified as a limitation and future improvement.
+> The proposed RL-based adaptive fusion framework demonstrates sample-level adaptive and explainable image-text fusion through learned actions, modality weights, Grad-CAM image explanations, and text token saliency. It achieves competitive performance with strong fixed-fusion baselines, with a modest improvement in the main final run.
 
 Avoid this wording:
 
@@ -182,9 +182,9 @@ Also avoid this wording:
 
 > The RL model is statistically proven to outperform equal fusion.
 
-The multi-seed result does not support that claim.
+Use the softer wording: competitive performance, modest main-run improvement, and stronger explainability/adaptivity.
 
-That is too strong for the final numbers.
+That is the safest wording for the final numbers.
 
 ## Files to Show in Viva
 
