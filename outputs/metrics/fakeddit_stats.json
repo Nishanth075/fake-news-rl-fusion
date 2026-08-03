@@ -1,0 +1,82 @@
+{
+  "class_distribution": {
+    "0": 268908,
+    "1": 413753
+  },
+  "cross_split_leakage": {
+    "train_vs_test_image_path_overlap": 0,
+    "train_vs_test_sample_id_overlap": 0,
+    "train_vs_test_text_overlap": 4754,
+    "train_vs_validation_image_path_overlap": 0,
+    "train_vs_validation_sample_id_overlap": 0,
+    "train_vs_validation_text_overlap": 4647,
+    "validation_vs_test_image_path_overlap": 0,
+    "validation_vs_test_sample_id_overlap": 0,
+    "validation_vs_test_text_overlap": 1380
+  },
+  "dataset": "Fakeddit multimodal_only_samples",
+  "fakeddit_label_note": "Fakeddit 2_way_label is converted from 0=False/Fake, 1=True/Real to project standard 0=Real, 1=Fake.",
+  "label_standard": {
+    "0": "Real",
+    "1": "Fake"
+  },
+  "splits": {
+    "test": {
+      "class_distribution": {
+        "0": 23507,
+        "1": 35812
+      },
+      "rows": 59319
+    },
+    "train": {
+      "class_distribution": {
+        "0": 222081,
+        "1": 341919
+      },
+      "rows": 564000
+    },
+    "validation": {
+      "class_distribution": {
+        "0": 23320,
+        "1": 36022
+      },
+      "rows": 59342
+    }
+  },
+  "total_rows": 682661,
+  "validation": {
+    "test": {
+      "input_rows": 59319,
+      "removed_duplicate_ids": 0,
+      "removed_duplicate_image_paths": 0,
+      "removed_duplicate_text": 0,
+      "removed_empty_text": 0,
+      "removed_missing_images": 0,
+      "removed_missing_required": 0,
+      "removed_rows": 0,
+      "valid_rows": 59319
+    },
+    "train": {
+      "input_rows": 564000,
+      "removed_duplicate_ids": 0,
+      "removed_duplicate_image_paths": 0,
+      "removed_duplicate_text": 0,
+      "removed_empty_text": 0,
+      "removed_missing_images": 0,
+      "removed_missing_required": 0,
+      "removed_rows": 0,
+      "valid_rows": 564000
+    },
+    "validation": {
+      "input_rows": 59342,
+      "removed_duplicate_ids": 0,
+      "removed_duplicate_image_paths": 0,
+      "removed_duplicate_text": 0,
+      "removed_empty_text": 0,
+      "removed_missing_images": 0,
+      "removed_missing_required": 0,
+      "removed_rows": 0,
+      "valid_rows": 59342
+    }
+  }
+}

@@ -1,0 +1,345 @@
+{
+  "device": "cuda",
+  "output_dir": "outputs/explainability/final",
+  "rows": 16,
+  "samples": [
+    {
+      "final_prediction": 0,
+      "final_probability": 0.16039416,
+      "image_gradcam_path": "outputs/explainability/final/image_gradcam/2puoj1_gradcam.png",
+      "image_probability": 0.2666678726673126,
+      "image_weight": 0.6,
+      "label": 0,
+      "sample_id": "2puoj1",
+      "selected_action": 2,
+      "text_probability": 0.0009835731470957,
+      "text_saliency_path": "outputs/explainability/final/text_saliency/2puoj1_text_saliency.csv",
+      "text_weight": 0.4,
+      "top_text_tokens": [
+        "spiked",
+        "oklahoma",
+        "leads",
+        "bull",
+        "mm",
+        "red",
+        "road",
+        "to"
+      ]
+    },
+    {
+      "final_prediction": 0,
+      "final_probability": 0.18460155,
+      "image_gradcam_path": "outputs/explainability/final/image_gradcam/c6p5hz_gradcam.png",
+      "image_probability": 0.240245446562767,
+      "image_weight": 0.75,
+      "label": 0,
+      "sample_id": "c6p5hz",
+      "selected_action": 1,
+      "text_probability": 0.0176698546856641,
+      "text_saliency_path": "outputs/explainability/final/text_saliency/c6p5hz_text_saliency.csv",
+      "text_weight": 0.25,
+      "top_text_tokens": [
+        "pepper",
+        "looks",
+        "stitch",
+        "like",
+        "itself",
+        "it",
+        "this",
+        "##ed"
+      ]
+    },
+    {
+      "final_prediction": 0,
+      "final_probability": 0.069142975,
+      "image_gradcam_path": "outputs/explainability/final/image_gradcam/c4b9wx_gradcam.png",
+      "image_probability": 0.0916278362274169,
+      "image_weight": 0.75,
+      "label": 0,
+      "sample_id": "c4b9wx",
+      "selected_action": 1,
+      "text_probability": 0.0016883887583389,
+      "text_saliency_path": "outputs/explainability/final/text_saliency/c4b9wx_text_saliency.csv",
+      "text_weight": 0.25,
+      "top_text_tokens": [
+        "skinny",
+        "egg",
+        "weird",
+        "cart",
+        "morning",
+        "found",
+        "long",
+        "i"
+      ]
+    },
+    {
+      "final_prediction": 0,
+      "final_probability": 0.37779552,
+      "image_gradcam_path": "outputs/explainability/final/image_gradcam/8ia8bg_gradcam.png",
+      "image_probability": 0.7525697946548462,
+      "image_weight": 0.5,
+      "label": 0,
+      "sample_id": "8ia8bg",
+      "selected_action": 3,
+      "text_probability": 0.0030212567653506,
+      "text_saliency_path": "outputs/explainability/final/text_saliency/8ia8bg_text_saliency.csv",
+      "text_weight": 0.5,
+      "top_text_tokens": [
+        "performers",
+        "these",
+        "street"
+      ]
+    },
+    {
+      "final_prediction": 0,
+      "final_probability": 0.028231146,
+      "image_gradcam_path": "outputs/explainability/final/image_gradcam/1pnn72_gradcam.png",
+      "image_probability": 0.0369154475629329,
+      "image_weight": 0.75,
+      "label": 0,
+      "sample_id": "1pnn72",
+      "selected_action": 1,
+      "text_probability": 0.0021782449912279,
+      "text_saliency_path": "outputs/explainability/final/text_saliency/1pnn72_text_saliency.csv",
+      "text_weight": 0.25,
+      "top_text_tokens": [
+        "shaking",
+        "cat",
+        "hands",
+        "##fish",
+        "##aw",
+        "cr",
+        "with",
+        "a"
+      ]
+    },
+    {
+      "final_prediction": 1,
+      "final_probability": 0.98051363,
+      "image_gradcam_path": "outputs/explainability/final/image_gradcam/czd1xu_gradcam.png",
+      "image_probability": 0.9892433881759644,
+      "image_weight": 0.9,
+      "label": 0,
+      "sample_id": "czd1xu",
+      "selected_action": 0,
+      "text_probability": 0.9019456505775452,
+      "text_saliency_path": "outputs/explainability/final/text_saliency/czd1xu_text_saliency.csv",
+      "text_weight": 0.1,
+      "top_text_tokens": [
+        "screaming",
+        "branch",
+        "hear",
+        "else",
+        "who",
+        "this",
+        "can"
+      ]
+    },
+    {
+      "final_prediction": 0,
+      "final_probability": 0.06307031,
+      "image_gradcam_path": "outputs/explainability/final/image_gradcam/3pz76g_gradcam.png",
+      "image_probability": 0.083788126707077,
+      "image_weight": 0.75,
+      "label": 0,
+      "sample_id": "3pz76g",
+      "selected_action": 1,
+      "text_probability": 0.0009168657124973,
+      "text_saliency_path": "outputs/explainability/final/text_saliency/3pz76g_text_saliency.csv",
+      "text_weight": 0.25,
+      "top_text_tokens": [
+        "teen",
+        "gift",
+        "deaf",
+        "giving",
+        "is",
+        "hearing",
+        "children",
+        "the"
+      ]
+    },
+    {
+      "final_prediction": 0,
+      "final_probability": 0.20411369,
+      "image_gradcam_path": "outputs/explainability/final/image_gradcam/5woni4_gradcam.png",
+      "image_probability": 0.3335368633270263,
+      "image_weight": 0.6,
+      "label": 0,
+      "sample_id": "5woni4",
+      "selected_action": 2,
+      "text_probability": 0.0099789099767804,
+      "text_saliency_path": "outputs/explainability/final/text_saliency/5woni4_text_saliency.csv",
+      "text_weight": 0.4,
+      "top_text_tokens": [
+        "##ma",
+        "##own",
+        "no",
+        "restaurant",
+        "##wash",
+        "top",
+        "be",
+        "dish"
+      ]
+    },
+    {
+      "final_prediction": 1,
+      "final_probability": 0.8808564,
+      "image_gradcam_path": "outputs/explainability/final/image_gradcam/ayyfhu_gradcam.png",
+      "image_probability": 0.7828628420829773,
+      "image_weight": 0.5,
+      "label": 1,
+      "sample_id": "ayyfhu",
+      "selected_action": 3,
+      "text_probability": 0.9788499474525452,
+      "text_saliency_path": "outputs/explainability/final/text_saliency/ayyfhu_text_saliency.csv",
+      "text_weight": 0.5,
+      "top_text_tokens": [
+        "mustache",
+        "fancy",
+        "watching",
+        "recording",
+        "you",
+        "is",
+        "and"
+      ]
+    },
+    {
+      "final_prediction": 1,
+      "final_probability": 0.64862275,
+      "image_gradcam_path": "outputs/explainability/final/image_gradcam/cb86b43_gradcam.png",
+      "image_probability": 0.2973700761795044,
+      "image_weight": 0.5,
+      "label": 1,
+      "sample_id": "cb86b43",
+      "selected_action": 3,
+      "text_probability": 0.9998754262924194,
+      "text_saliency_path": "outputs/explainability/final/text_saliency/cb86b43_text_saliency.csv",
+      "text_weight": 0.5,
+      "top_text_tokens": [
+        "discussions",
+        "other"
+      ]
+    },
+    {
+      "final_prediction": 0,
+      "final_probability": 0.16592038,
+      "image_gradcam_path": "outputs/explainability/final/image_gradcam/2abqok_gradcam.png",
+      "image_probability": 0.2755563855171203,
+      "image_weight": 0.6,
+      "label": 1,
+      "sample_id": "2abqok",
+      "selected_action": 2,
+      "text_probability": 0.0014663452748209,
+      "text_saliency_path": "outputs/explainability/final/text_saliency/2abqok_text_saliency.csv",
+      "text_weight": 0.4,
+      "top_text_tokens": [
+        "places",
+        "nursing",
+        "family",
+        "queen",
+        "elizabeth",
+        "home",
+        "royal",
+        "british"
+      ]
+    },
+    {
+      "final_prediction": 1,
+      "final_probability": 0.9573523,
+      "image_gradcam_path": "outputs/explainability/final/image_gradcam/ciuejpq_gradcam.png",
+      "image_probability": 0.9431748986244202,
+      "image_weight": 0.75,
+      "label": 1,
+      "sample_id": "ciuejpq",
+      "selected_action": 1,
+      "text_probability": 0.9998844861984252,
+      "text_saliency_path": "outputs/explainability/final/text_saliency/ciuejpq_text_saliency.csv",
+      "text_weight": 0.25,
+      "top_text_tokens": [
+        "##outs",
+        "cut"
+      ]
+    },
+    {
+      "final_prediction": 1,
+      "final_probability": 0.9997305,
+      "image_gradcam_path": "outputs/explainability/final/image_gradcam/cd8kyn4_gradcam.png",
+      "image_probability": 0.9997144341468812,
+      "image_weight": 0.9,
+      "label": 1,
+      "sample_id": "cd8kyn4",
+      "selected_action": 0,
+      "text_probability": 0.9998754262924194,
+      "text_saliency_path": "outputs/explainability/final/text_saliency/cd8kyn4_text_saliency.csv",
+      "text_weight": 0.1,
+      "top_text_tokens": [
+        "discussions",
+        "other"
+      ]
+    },
+    {
+      "final_prediction": 0,
+      "final_probability": 0.47847378,
+      "image_gradcam_path": "outputs/explainability/final/image_gradcam/9hy9wa_gradcam.png",
+      "image_probability": 0.9242572784423828,
+      "image_weight": 0.5,
+      "label": 1,
+      "sample_id": "9hy9wa",
+      "selected_action": 3,
+      "text_probability": 0.032690268009901,
+      "text_saliency_path": "outputs/explainability/final/text_saliency/9hy9wa_text_saliency.csv",
+      "text_weight": 0.5,
+      "top_text_tokens": [
+        "piazza",
+        "##zia",
+        "##ne",
+        "ve"
+      ]
+    },
+    {
+      "final_prediction": 0,
+      "final_probability": 0.4601978,
+      "image_gradcam_path": "outputs/explainability/final/image_gradcam/24rpu4_gradcam.png",
+      "image_probability": 0.7744274735450745,
+      "image_weight": 0.5,
+      "label": 1,
+      "sample_id": "24rpu4",
+      "selected_action": 3,
+      "text_probability": 0.1459681391716003,
+      "text_saliency_path": "outputs/explainability/final/text_saliency/24rpu4_text_saliency.csv",
+      "text_weight": 0.5,
+      "top_text_tokens": [
+        "slot",
+        "smiling",
+        "##h",
+        "bathroom",
+        "in",
+        "the"
+      ]
+    },
+    {
+      "final_prediction": 0,
+      "final_probability": 0.36601937,
+      "image_gradcam_path": "outputs/explainability/final/image_gradcam/32x9ht_gradcam.png",
+      "image_probability": 0.7233670949935913,
+      "image_weight": 0.5,
+      "label": 1,
+      "sample_id": "32x9ht",
+      "selected_action": 3,
+      "text_probability": 0.0086716320365667,
+      "text_saliency_path": "outputs/explainability/final/text_saliency/32x9ht_text_saliency.csv",
+      "text_weight": 0.5,
+      "top_text_tokens": [
+        "presents",
+        "##rien",
+        "conan",
+        "americas",
+        "coco",
+        "mcdonald",
+        "wages",
+        "ob"
+      ]
+    }
+  ],
+  "summary_csv": "outputs/explainability/final/explanation_summary.csv"
+}

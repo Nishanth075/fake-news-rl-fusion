@@ -1,0 +1,36 @@
+{
+  "image_normalization": {
+    "blur": {
+      "high": 4224.834082031237,
+      "low": 68.28135681152344
+    },
+    "contrast": {
+      "high": 81.56913452148437,
+      "low": 32.42022705078125
+    },
+    "entropy": {
+      "high": 7.812583880435012,
+      "low": 4.384276363311864
+    }
+  },
+  "splits": {
+    "test": {
+      "image_quality_mean": 0.6386171360838627,
+      "output_path": "data/final_modality_outputs/test_outputs.csv",
+      "rows": 3780,
+      "text_quality_mean": 0.7534950029394474
+    },
+    "train": {
+      "image_quality_mean": 0.6336748018196592,
+      "output_path": "data/final_modality_outputs/train_outputs.csv",
+      "rows": 18893,
+      "text_quality_mean": 0.7522992054670453
+    },
+    "validation": {
+      "image_quality_mean": 0.6336975631204236,
+      "output_path": "data/final_modality_outputs/validation_outputs.csv",
+      "rows": 3798,
+      "text_quality_mean": 0.7513574395880873
+    }
+  }
+}

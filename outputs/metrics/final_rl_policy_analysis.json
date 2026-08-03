@@ -1,0 +1,104 @@
+{
+  "action_distribution": {
+    "0": 771,
+    "1": 1072,
+    "2": 465,
+    "3": 1279,
+    "4": 187,
+    "5": 6
+  },
+  "agreement": {
+    "False": {
+      "average_image_weight": 0.49873417721518987,
+      "average_text_weight": 0.5012658227848101,
+      "macro_f1": 0.7156473921013164,
+      "rows": 948
+    },
+    "True": {
+      "average_image_weight": 0.7132415254237289,
+      "average_text_weight": 0.2867584745762711,
+      "macro_f1": 0.9110233650827113,
+      "rows": 2832
+    }
+  },
+  "by_image_quality_group": {
+    "high": {
+      "average_image_weight": 0.6659103486441614,
+      "average_text_weight": 0.33408965135583846,
+      "macro_f1": 0.8652324245302259,
+      "rows": 1807
+    },
+    "low": {
+      "average_image_weight": 0.5627777777777778,
+      "average_text_weight": 0.43722222222222223,
+      "macro_f1": 0.8393676695563488,
+      "rows": 90
+    },
+    "medium": {
+      "average_image_weight": 0.6578597981943707,
+      "average_text_weight": 0.3421402018056293,
+      "macro_f1": 0.8697813831143006,
+      "rows": 1883
+    }
+  },
+  "by_label": {
+    "0": {
+      "average_image_weight": 0.652545551982851,
+      "average_text_weight": 0.3474544480171489,
+      "macro_f1": null,
+      "rows": 1866
+    },
+    "1": {
+      "average_image_weight": 0.6661703239289447,
+      "average_text_weight": 0.33382967607105535,
+      "macro_f1": null,
+      "rows": 1914
+    }
+  },
+  "by_text_quality_group": {
+    "high": {
+      "average_image_weight": 0.6594444444444444,
+      "average_text_weight": 0.34055555555555556,
+      "macro_f1": 0.8676044474818365,
+      "rows": 3780
+    }
+  },
+  "details_path": "outputs/metrics/final_rl_action_details.csv",
+  "oracle_action_upper_bound": {
+    "action_distribution": {
+      "0": 2375,
+      "1": 204,
+      "2": 283,
+      "3": 198,
+      "4": 80,
+      "5": 41,
+      "6": 599
+    },
+    "metrics": {
+      "accuracy": 0.9306878306878307,
+      "balanced_accuracy": 0.9312612766986866,
+      "confusion_matrix": [
+        [
+          1822,
+          44
+        ],
+        [
+          218,
+          1696
+        ]
+      ],
+      "macro_f1": 0.9306107315006091,
+      "precision_macro": 0.9339249492900609,
+      "recall_macro": 0.9312612766986866,
+      "roc_auc": 0.9419275916947498,
+      "weighted_f1": 0.9305813603816676
+    }
+  },
+  "rows": 3780,
+  "weight_summary": {
+    "average_image_weight": 0.6594444444444444,
+    "average_text_weight": 0.34055555555555556,
+    "image_weight_std": 0.1635889102893776,
+    "text_weight_std": 0.16358891028937653
+  }
+}

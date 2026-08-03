@@ -1,0 +1,32 @@
+{
+  "best_checkpoint_path": "outputs/checkpoints/final_image_model/best_image_model.pt",
+  "best_validation_macro_f1": 0.794585550203593,
+  "device": "cuda",
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.49811244190594195,
+      "validation_loss": 0.45759836310082325,
+      "validation_metrics": {
+        "accuracy": 0.7959452343338599,
+        "balanced_accuracy": 0.7975426726621189,
+        "confusion_matrix": [
+          [
+            1666,
+            201
+          ],
+          [
+            574,
+            1357
+          ]
+        ],
+        "macro_f1": 0.794585550203593,
+        "precision_macro": 0.8073692233632863,
+        "recall_macro": 0.7975426726621189,
+        "roc_auc": 0.8612751884304155,
+        "weighted_f1": 0.7943039327785539
+      }
+    }
+  ],
+  "smoke_test": false
+}

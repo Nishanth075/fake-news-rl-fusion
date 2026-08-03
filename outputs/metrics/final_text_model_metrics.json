@@ -1,0 +1,80 @@
+{
+  "best_checkpoint_path": "outputs/checkpoints/final_text_model/best_text_model.pt",
+  "best_validation_macro_f1": 0.8477658392613685,
+  "device": "cuda",
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.40289054582352823,
+      "validation_loss": 0.3567314712608281,
+      "validation_metrics": {
+        "accuracy": 0.8422854133754608,
+        "balanced_accuracy": 0.8424492056839372,
+        "confusion_matrix": [
+          [
+            1591,
+            276
+          ],
+          [
+            323,
+            1608
+          ]
+        ],
+        "macro_f1": 0.8422822535107766,
+        "precision_macro": 0.8423733269439397,
+        "recall_macro": 0.8424492056839372,
+        "roc_auc": 0.9217939923615401,
+        "weighted_f1": 0.8422941494719405
+      }
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.25996026223076724,
+      "validation_loss": 0.3869148799781739,
+      "validation_metrics": {
+        "accuracy": 0.841495523959979,
+        "balanced_accuracy": 0.8410510773812215,
+        "confusion_matrix": [
+          [
+            1521,
+            346
+          ],
+          [
+            256,
+            1675
+          ]
+        ],
+        "macro_f1": 0.8412344956158868,
+        "precision_macro": 0.8423672986817927,
+        "recall_macro": 0.8410510773812215,
+        "roc_auc": 0.9222547187003578,
+        "weighted_f1": 0.8413429749277174
+      }
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.13120911429266324,
+      "validation_loss": 0.47377607490221973,
+      "validation_metrics": {
+        "accuracy": 0.8478146392838336,
+        "balanced_accuracy": 0.8483572373839066,
+        "confusion_matrix": [
+          [
+            1644,
+            223
+          ],
+          [
+            355,
+            1576
+          ]
+        ],
+        "macro_f1": 0.8477658392613685,
+        "precision_macro": 0.8492267256474263,
+        "recall_macro": 0.8483572373839066,
+        "roc_auc": 0.9185406153428806,
+        "weighted_f1": 0.84771990982846
+      }
+    }
+  ],
+  "smoke_test": false
+}

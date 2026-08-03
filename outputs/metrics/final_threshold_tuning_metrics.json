@@ -1,0 +1,76 @@
+{
+  "rows": [
+    {
+      "method": "image_only",
+      "selected_threshold": 0.42499999999999993,
+      "source": "baseline",
+      "test_accuracy_tuned": 0.7798941798941799,
+      "test_macro_f1_at_0_5": 0.7769284368078044,
+      "test_macro_f1_tuned": 0.7793714060583068,
+      "test_roc_auc": 0.8572159951886086,
+      "validation_macro_f1_at_selected_threshold": 0.7988655049267948
+    },
+    {
+      "method": "text_only",
+      "selected_threshold": 0.4799999999999999,
+      "source": "baseline",
+      "test_accuracy_tuned": 0.8386243386243386,
+      "test_macro_f1_at_0_5": 0.838769176548389,
+      "test_macro_f1_tuned": 0.8385286880837561,
+      "test_roc_auc": 0.912095228815486,
+      "validation_macro_f1_at_selected_threshold": 0.8493661810693311
+    },
+    {
+      "method": "equal_fusion",
+      "selected_threshold": 0.48499999999999993,
+      "source": "baseline",
+      "test_accuracy_tuned": 0.8671957671957672,
+      "test_macro_f1_at_0_5": 0.8673332160630083,
+      "test_macro_f1_tuned": 0.867142060170456,
+      "test_roc_auc": 0.9325416824862439,
+      "validation_macro_f1_at_selected_threshold": 0.8698945987950106
+    },
+    {
+      "method": "confidence_weighted_fusion",
+      "selected_threshold": 0.4799999999999999,
+      "source": "baseline",
+      "test_accuracy_tuned": 0.8671957671957672,
+      "test_macro_f1_at_0_5": 0.8673332160630083,
+      "test_macro_f1_tuned": 0.8671391950717237,
+      "test_roc_auc": 0.9339962436203705,
+      "validation_macro_f1_at_selected_threshold": 0.8704213413100106
+    },
+    {
+      "method": "reliability_weighted_fusion",
+      "selected_threshold": 0.4799999999999999,
+      "source": "baseline",
+      "test_accuracy_tuned": 0.864021164021164,
+      "test_macro_f1_at_0_5": 0.8612064094284793,
+      "test_macro_f1_tuned": 0.8639474265047768,
+      "test_roc_auc": 0.9328661938153013,
+      "validation_macro_f1_at_selected_threshold": 0.8690906049505315
+    },
+    {
+      "method": "rl_adaptive_fusion",
+      "selected_threshold": 0.48999999999999994,
+      "source": "rl",
+      "test_accuracy_tuned": 0.8685185185185185,
+      "test_macro_f1_at_0_5": 0.8676044474818365,
+      "test_macro_f1_tuned": 0.8684550955427615,
+      "test_roc_auc": 0.9328939130746426,
+      "validation_macro_f1_at_selected_threshold": 0.8704062437495786
+    },
+    {
+      "method": "supervised_mlp_fusion",
+      "selected_threshold": 0.635,
+      "source": "supervised_fusion",
+      "test_accuracy_tuned": 0.8510582010582011,
+      "test_macro_f1_at_0_5": 0.8499976379068706,
+      "test_macro_f1_tuned": 0.8509931166569424,
+      "test_roc_auc": 0.9290694952630866,
+      "validation_macro_f1_at_selected_threshold": 0.8599197123042724
+    }
+  ],
+  "selection_rule": "threshold selected on validation macro_f1 and applied unchanged to test",
+  "summary_path": "outputs/metrics/final_threshold_tuning_summary.csv"
+}
