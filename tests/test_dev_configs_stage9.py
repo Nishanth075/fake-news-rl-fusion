@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 from pathlib import Path
 
@@ -34,3 +34,4 @@ def test_dev_configs_do_not_reuse_debug_output_dirs() -> None:
     assert Path(image_config["paths"]["train_csv"]).parts[1] == "dev_splits_available"
     assert Path(text_config["paths"]["train_csv"]).parts[1] == "dev_splits_available"
     assert Path(reliability_config["reliability"]["output_dir"]).parts[1] == "dev_modality_outputs"
+

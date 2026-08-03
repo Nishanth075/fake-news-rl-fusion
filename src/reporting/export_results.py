@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import json
 from pathlib import Path
@@ -163,3 +163,4 @@ def _robustness_summary(path_value: str | None) -> list[dict[str, Any]]:
 def _read_json(path_value: str | Path) -> dict[str, Any]:
     with Path(path_value).open("r", encoding="utf-8") as handle:
         return json.load(handle)
+

@@ -1,0 +1,25 @@
+seed: 42
+
+image_model:
+  architecture: resnet18
+  pretrained: true
+  image_size: 224
+  resize_size: 256
+
+text_model:
+  architecture: distilbert-base-uncased
+  max_length: 128
+
+paths:
+  image_root: .
+  image_checkpoint_dir: outputs/checkpoints/final_image_model
+  text_checkpoint_dir: outputs/checkpoints/final_text_model
+
+explainability:
+  sample_count: 16
+  split_csv: data/final_splits_available/test.csv
+  image_outputs_csv: data/final_modality_outputs/test_image_outputs.csv
+  text_outputs_csv: data/final_modality_outputs/test_text_outputs.csv
+  fusion_predictions_csv: outputs/metrics/final_rl_fusion_test_predictions.csv
+  output_dir: outputs/explainability/final
+  summary_path: outputs/metrics/final_explainability_summary.json
