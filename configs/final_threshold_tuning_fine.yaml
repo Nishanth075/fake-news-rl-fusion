@@ -1,0 +1,16 @@
+seed: 42
+
+threshold_tuning:
+  min_threshold: 0.05
+  max_threshold: 0.95
+  num_thresholds: 181
+
+paths:
+  validation_outputs: data/final_modality_outputs/validation_outputs.csv
+  test_outputs: data/final_modality_outputs/test_outputs.csv
+  rl_validation_predictions: outputs/metrics/final_rl_fusion_fine_validation_predictions.csv
+  rl_test_predictions: outputs/metrics/final_rl_fusion_fine_test_predictions.csv
+  supervised_validation_predictions: outputs/metrics/final_supervised_fusion_validation_predictions.csv
+  supervised_test_predictions: outputs/metrics/final_supervised_fusion_test_predictions.csv
+  summary_path: outputs/metrics/final_threshold_tuning_fine_summary.csv
+  metrics_path: outputs/metrics/final_threshold_tuning_fine_metrics.json

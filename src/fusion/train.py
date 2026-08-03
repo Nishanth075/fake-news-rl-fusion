@@ -10,7 +10,7 @@ from torch import nn
 from torch.utils.data import DataLoader, TensorDataset
 
 from src.evaluation.metrics import binary_classification_metrics
-from src.fusion.actions import FUSION_ACTIONS
+from src.fusion.actions import FUSION_ACTIONS, resolve_fusion_actions
 from src.fusion.q_network import FusionQNetwork
 from src.fusion.reward import reward_from_predictions
 from src.fusion.state_builder import build_states
@@ -30,6 +30,7 @@ def train_rl_fusion(config: dict[str, Any]) -> dict[str, Any]:
     train_df = pd.read_csv(paths["train_outputs"])
     validation_df = pd.read_csv(paths["validation_outputs"])
     feature_columns = fusion_config.get("features")
+    action_weights = resolve_fusion_actions(config)
     train_states = torch.tensor(build_states(train_df, feature_columns), dtype=torch.float32)
     train_dataset = TensorDataset(train_states, torch.arange(len(train_df), dtype=torch.long))
     loader = DataLoader(
@@ -40,10 +41,11 @@ def train_rl_fusion(config: dict[str, Any]) -> dict[str, Any]:
 
     model = FusionQNetwork(
         state_dim=int(fusion_config.get("state_dim", len(feature_columns or []))),
-        action_dim=int(fusion_config["action_dim"]),
+        action_dim=len(action_weights),
         dropout=float(fusion_config.get("dropout", 0.1)),
     ).to(device)
     model.feature_columns = feature_columns
+    model.action_weights = action_weights
     optimizer = torch.optim.Adam(model.parameters(), lr=float(fusion_config["learning_rate"]))
     criterion = nn.MSELoss()
 
@@ -61,7 +63,7 @@ def train_rl_fusion(config: dict[str, Any]) -> dict[str, Any]:
     for epoch in range(1, epochs + 1):
         epsilon = _linear_epsilon(epoch, epochs, epsilon_start, epsilon_end)
         train_loss, train_reward = _train_one_epoch(
-            model, loader, train_df, optimizer, criterion, device, epsilon, rng
+            model, loader, train_df, optimizer, criterion, device, epsilon, rng, action_weights
         )
         validation_predictions = predict_with_model(model, validation_df, device)
         validation_metrics = binary_classification_metrics(
@@ -117,9 +119,10 @@ def evaluate_rl_fusion(config: dict[str, Any], split: str = "test") -> dict[str,
 
     checkpoint = torch.load(checkpoint_path, map_location=device)
     feature_columns = config["fusion"].get("features")
+    action_weights = resolve_fusion_actions(config)
     model = FusionQNetwork(
         state_dim=int(config["fusion"].get("state_dim", len(feature_columns or []))),
-        action_dim=int(config["fusion"]["action_dim"]),
+        action_dim=len(action_weights),
         dropout=float(config["fusion"].get("dropout", 0.1)),
     ).to(device)
     model.feature_columns = feature_columns
@@ -147,7 +150,8 @@ def predict_with_model(model: nn.Module, df: pd.DataFrame, device: torch.device)
     states = torch.tensor(build_states(df, feature_columns), dtype=torch.float32, device=device)
     with torch.no_grad():
         actions = torch.argmax(model(states), dim=1).detach().cpu().numpy().astype(int)
-    weights = np.asarray([FUSION_ACTIONS[action] for action in actions], dtype=np.float32)
+    action_weights = getattr(model, "action_weights", FUSION_ACTIONS)
+    weights = np.asarray([action_weights[action] for action in actions], dtype=np.float32)
     final_probability = (
         weights[:, 0] * df["image_probability"].to_numpy(dtype=np.float32)
         + weights[:, 1] * df["text_probability"].to_numpy(dtype=np.float32)
@@ -174,12 +178,13 @@ def _train_one_epoch(
     device: torch.device,
     epsilon: float,
     rng: np.random.Generator,
+    action_weights: list[tuple[float, float]],
 ) -> tuple[float, float]:
     model.train()
     total_loss = 0.0
     total_reward = 0.0
     total_examples = 0
-    action_count = len(FUSION_ACTIONS)
+    action_count = len(action_weights)
     for states, indices in loader:
         states = states.to(device)
         indices_np = indices.numpy()
@@ -188,7 +193,7 @@ def _train_one_epoch(
         random_actions = rng.integers(0, action_count, size=len(indices_np))
         explore = rng.random(len(indices_np)) < epsilon
         actions_np = np.where(explore, random_actions, greedy_actions).astype(int)
-        rewards_np = _calculate_rewards(train_df.iloc[indices_np], actions_np)
+        rewards_np = _calculate_rewards(train_df.iloc[indices_np], actions_np, action_weights)
 
         actions = torch.tensor(actions_np, dtype=torch.long, device=device).unsqueeze(1)
         rewards = torch.tensor(rewards_np, dtype=torch.float32, device=device)
@@ -205,8 +210,13 @@ def _train_one_epoch(
     return total_loss / max(total_examples, 1), total_reward / max(total_examples, 1)
 
 
-def _calculate_rewards(df: pd.DataFrame, actions: np.ndarray) -> np.ndarray:
-    weights = np.asarray([FUSION_ACTIONS[action] for action in actions], dtype=np.float32)
+def _calculate_rewards(
+    df: pd.DataFrame,
+    actions: np.ndarray,
+    action_weights: list[tuple[float, float]] | None = None,
+) -> np.ndarray:
+    action_space = action_weights or FUSION_ACTIONS
+    weights = np.asarray([action_space[action] for action in actions], dtype=np.float32)
     final_probability = (
         weights[:, 0] * df["image_probability"].to_numpy(dtype=np.float32)
         + weights[:, 1] * df["text_probability"].to_numpy(dtype=np.float32)
@@ -224,5 +234,8 @@ def _linear_epsilon(epoch: int, epochs: int, start: float, end: float) -> float:
 
 def _action_distribution(actions: np.ndarray) -> dict[str, int]:
     return {str(index): int((actions == index).sum()) for index in range(len(FUSION_ACTIONS))}
+
+
+
 
 

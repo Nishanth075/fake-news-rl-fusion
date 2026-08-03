@@ -1,8 +1,8 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import pandas as pd
 
-from src.fusion.actions import FUSION_ACTIONS, get_action_weights
+from src.fusion.actions import FUSION_ACTIONS, get_action_weights, resolve_fusion_actions
 from src.fusion.reward import reward_from_predictions
 from src.fusion.state_builder import build_states
 from src.fusion.train import train_rl_fusion
@@ -14,6 +14,14 @@ def test_fusion_actions_sum_to_one() -> None:
         assert abs((image_weight + text_weight) - 1.0) < 1e-8
     assert get_action_weights(3) == (0.50, 0.50)
 
+
+
+
+def test_custom_fusion_actions_from_config() -> None:
+    actions = resolve_fusion_actions({"fusion": {"action_weights": [[0.8, 0.2], [0.2, 0.8]]}})
+
+    assert actions == [(0.8, 0.2), (0.2, 0.8)]
+    assert get_action_weights(1, actions) == (0.2, 0.8)
 
 def test_state_builder_has_nine_features() -> None:
     df = _fusion_df()
@@ -83,3 +91,4 @@ def _fusion_df() -> pd.DataFrame:
             "text_quality": [0.9, 0.8, 0.7, 0.8],
         }
     )
+

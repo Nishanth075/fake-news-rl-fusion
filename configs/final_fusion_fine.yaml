@@ -1,0 +1,43 @@
+seed: 42
+
+fusion:
+  state_dim: 9
+  action_dim: 19
+  action_weights:
+    - [0.95, 0.05]
+    - [0.90, 0.10]
+    - [0.85, 0.15]
+    - [0.80, 0.20]
+    - [0.75, 0.25]
+    - [0.70, 0.30]
+    - [0.65, 0.35]
+    - [0.60, 0.40]
+    - [0.55, 0.45]
+    - [0.50, 0.50]
+    - [0.45, 0.55]
+    - [0.40, 0.60]
+    - [0.35, 0.65]
+    - [0.30, 0.70]
+    - [0.25, 0.75]
+    - [0.20, 0.80]
+    - [0.15, 0.85]
+    - [0.10, 0.90]
+    - [0.05, 0.95]
+  hidden_dims: [96, 48]
+  dropout: 0.05
+  learning_rate: 0.0005
+  batch_size: 64
+  epochs: 60
+  epsilon_start: 0.7
+  epsilon_end: 0.03
+  reward_correct: 1.0
+  reward_incorrect: -1.0
+
+paths:
+  train_outputs: data/final_modality_outputs/train_outputs.csv
+  validation_outputs: data/final_modality_outputs/validation_outputs.csv
+  test_outputs: data/final_modality_outputs/test_outputs.csv
+  checkpoint_dir: outputs/checkpoints/final_fusion_fine
+  metrics_path: outputs/metrics/final_rl_fusion_fine_metrics.json
+  validation_predictions_path: outputs/metrics/final_rl_fusion_fine_validation_predictions.csv
+  test_predictions_path: outputs/metrics/final_rl_fusion_fine_test_predictions.csv
