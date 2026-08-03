@@ -128,6 +128,7 @@ def _stage_status_rows(inputs: dict[str, str]) -> list[dict[str, Any]]:
         "baselines": ["baseline_results"],
         "rl_fusion": ["rl_metrics", "rl_policy_analysis"],
         "supervised_fusion": ["supervised_fusion_metrics"],
+        "threshold_tuning": ["threshold_tuning"],
         "ablation": ["ablation_summary"],
         "robustness": ["robustness_summary"],
     }
@@ -185,6 +186,7 @@ def _robustness_summary(path_value: str | None) -> list[dict[str, Any]]:
 def _read_json(path_value: str | Path) -> dict[str, Any]:
     with Path(path_value).open("r", encoding="utf-8") as handle:
         return json.load(handle)
+
 
 
 

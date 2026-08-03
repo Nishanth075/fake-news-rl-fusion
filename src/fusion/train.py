@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 from pathlib import Path
 from typing import Any
@@ -92,12 +92,14 @@ def train_rl_fusion(config: dict[str, Any]) -> dict[str, Any]:
                 checkpoint_path,
             )
 
+    validation_summary = evaluate_rl_fusion(config, split="validation")
     test_summary = evaluate_rl_fusion(config, split="test")
     result = {
         "device": str(device),
         "best_validation_macro_f1": best_f1,
         "best_checkpoint_path": str(checkpoint_path),
         "history": history,
+        "validation": validation_summary,
         "test": test_summary,
     }
     write_json(result, paths["metrics_path"])
@@ -222,4 +224,5 @@ def _linear_epsilon(epoch: int, epochs: int, start: float, end: float) -> float:
 
 def _action_distribution(actions: np.ndarray) -> dict[str, int]:
     return {str(index): int((actions == index).sum()) for index in range(len(FUSION_ACTIONS))}
+
 

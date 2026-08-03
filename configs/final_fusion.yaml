@@ -19,4 +19,6 @@ paths:
   test_outputs: data/final_modality_outputs/test_outputs.csv
   checkpoint_dir: outputs/checkpoints/final_fusion
   metrics_path: outputs/metrics/final_rl_fusion_metrics.json
+  validation_predictions_path: outputs/metrics/final_rl_fusion_validation_predictions.csv
   test_predictions_path: outputs/metrics/final_rl_fusion_test_predictions.csv
+
