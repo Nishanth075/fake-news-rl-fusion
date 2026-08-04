@@ -1,0 +1,25 @@
+seed: 42
+
+controller_baselines:
+  state_dim: 9
+  logistic_max_iter: 1000
+  tree_depths: [3, 5]
+  include_unlimited_tree: true
+  features:
+    - image_probability
+    - image_confidence
+    - image_quality
+    - text_probability
+    - text_confidence
+    - text_quality
+    - disagreement
+    - confidence_difference
+    - quality_difference
+
+paths:
+  train_outputs: data/final_modality_outputs/train_outputs.csv
+  validation_outputs: data/final_modality_outputs/validation_outputs.csv
+  test_outputs: data/final_modality_outputs/test_outputs.csv
+  predictions_dir: outputs/metrics/controller_baselines
+  summary_path: outputs/metrics/final_controller_baseline_summary.csv
+  details_path: outputs/metrics/final_controller_baseline_details.json

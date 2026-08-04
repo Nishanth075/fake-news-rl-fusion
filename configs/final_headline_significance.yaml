@@ -1,0 +1,9 @@
+seed: 42
+
+headline_significance:
+  baseline_method: equal_fusion
+  threshold: 0.5
+  test_outputs: data/final_modality_outputs/test_outputs.csv
+  rl_predictions: outputs/metrics/final_rl_fusion_test_predictions.csv
+  output_path: outputs/metrics/final_headline_significance.json
+  summary_path: outputs/metrics/final_headline_significance_summary.csv
