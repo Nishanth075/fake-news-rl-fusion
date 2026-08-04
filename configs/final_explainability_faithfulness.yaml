@@ -16,7 +16,7 @@ paths:
   text_checkpoint_dir: outputs/checkpoints/final_text_model
 
 explainability:
-  sample_count: 16
+  sample_count: 300
   split_csv: data/final_splits_available/test.csv
   image_outputs_csv: data/final_modality_outputs/test_image_outputs.csv
   text_outputs_csv: data/final_modality_outputs/test_text_outputs.csv
@@ -27,5 +27,5 @@ explainability:
 explainability_faithfulness:
   image_mask_fraction: 0.15
   text_mask_fraction: 0.25
-  summary_csv: outputs/metrics/final_explainability_faithfulness.csv
-  summary_json: outputs/metrics/final_explainability_faithfulness.json
+  summary_csv: outputs/metrics/final_explainability_faithfulness_n300.csv
+  summary_json: outputs/metrics/final_explainability_faithfulness_n300.json

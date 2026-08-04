@@ -106,24 +106,33 @@ def text_deletion_test(
     mask_fraction: float,
     rng: np.random.Generator,
 ) -> dict[str, Any]:
-    text = str(row["text"])
-    saliency = _text_token_saliency(config, model, tokenizer, text, device)
+    saliency = _text_token_saliency(config, model, tokenizer, str(row["text"]), device)
     predicted_label = int(saliency["predicted_label"])
     original_probability = float(saliency["target_probability"])
-    token_count = len(saliency["tokens"])
+    valid_positions = np.asarray(saliency["valid_positions"], dtype=int)
+    token_count = len(valid_positions)
     delete_count = max(1, int(round(token_count * mask_fraction))) if token_count else 0
-    salient_indices = np.argsort(saliency["scores"])[-delete_count:] if delete_count else np.array([], dtype=int)
-    random_indices = rng.choice(token_count, size=delete_count, replace=False) if delete_count and token_count else []
-    salient_text = _delete_token_indices(saliency["tokens"], set(int(i) for i in salient_indices))
-    random_text = _delete_token_indices(saliency["tokens"], set(int(i) for i in random_indices))
-    salient_probability = _score_text_probability(config, model, tokenizer, salient_text, device, predicted_label)
-    random_probability = _score_text_probability(config, model, tokenizer, random_text, device, predicted_label)
+    sorted_indices = np.argsort(saliency["scores"])
+    salient_positions = valid_positions[sorted_indices[-delete_count:]] if delete_count else np.array([], dtype=int)
+    least_positions = valid_positions[sorted_indices[:delete_count]] if delete_count else np.array([], dtype=int)
+    random_positions = rng.choice(valid_positions, size=delete_count, replace=False) if delete_count and token_count else []
+    salient_probability = _score_text_masked_probability(
+        model, saliency["input_ids"], saliency["attention_mask"], tokenizer, set(int(i) for i in salient_positions), device, predicted_label
+    )
+    least_probability = _score_text_masked_probability(
+        model, saliency["input_ids"], saliency["attention_mask"], tokenizer, set(int(i) for i in least_positions), device, predicted_label
+    )
+    random_probability = _score_text_masked_probability(
+        model, saliency["input_ids"], saliency["attention_mask"], tokenizer, set(int(i) for i in random_positions), device, predicted_label
+    )
     return {
         "predicted_label": predicted_label,
         "original_target_probability": original_probability,
         "salient_deleted_probability": salient_probability,
+        "least_deleted_probability": least_probability,
         "random_deleted_probability": random_probability,
         "salient_comprehensiveness": original_probability - salient_probability,
+        "least_comprehensiveness": original_probability - least_probability,
         "random_comprehensiveness": original_probability - random_probability,
         "deleted_token_count": int(delete_count),
     }
@@ -238,39 +247,38 @@ def _text_token_saliency(
     keep_mask = attention_mask[0].detach().cpu().numpy().astype(bool)
     valid_tokens: list[str] = []
     valid_scores: list[float] = []
-    for token, score, keep in zip(tokens, saliency, keep_mask):
+    valid_positions: list[int] = []
+    for position, (token, score, keep) in enumerate(zip(tokens, saliency, keep_mask)):
         if keep and token not in {"[CLS]", "[SEP]", "[PAD]"}:
             valid_tokens.append(token)
             valid_scores.append(float(score))
+            valid_positions.append(position)
     return {
         "tokens": valid_tokens,
         "scores": np.asarray(valid_scores, dtype=float),
+        "valid_positions": valid_positions,
+        "input_ids": input_ids[0].detach().cpu(),
+        "attention_mask": attention_mask[0].detach().cpu(),
         "predicted_label": predicted_label,
         "target_probability": target_probability,
     }
 
 
-def _score_text_probability(
-    config: dict[str, Any],
+def _score_text_masked_probability(
     model: torch.nn.Module,
+    input_ids: torch.Tensor,
+    attention_mask: torch.Tensor,
     tokenizer: Any,
-    text: str,
+    mask_positions: set[int],
     device: torch.device,
     target_label: int,
 ) -> float:
-    text_config = config["text_model"]
-    encoded = tokenizer(
-        text,
-        padding="max_length",
-        truncation=True,
-        max_length=int(text_config["max_length"]),
-        return_tensors="pt",
-    )
+    masked_ids = input_ids.clone()
+    mask_token_id = tokenizer.mask_token_id if tokenizer.mask_token_id is not None else tokenizer.unk_token_id
+    for position in mask_positions:
+        masked_ids[position] = int(mask_token_id)
     with torch.no_grad():
-        outputs = model(
-            input_ids=encoded["input_ids"].to(device),
-            attention_mask=encoded["attention_mask"].to(device),
-        )
+        outputs = model(input_ids=masked_ids.unsqueeze(0).to(device), attention_mask=attention_mask.unsqueeze(0).to(device))
         probabilities = torch.softmax(outputs["logits"], dim=1)
     return float(probabilities[0, target_label].detach().cpu().item())
 
@@ -289,6 +297,7 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "image_salient_comprehensiveness_mean": float(df["image_salient_comprehensiveness"].mean()),
         "image_random_comprehensiveness_mean": float(df["image_random_comprehensiveness"].mean()),
         "text_salient_comprehensiveness_mean": float(df["text_salient_comprehensiveness"].mean()),
+        "text_least_comprehensiveness_mean": float(df["text_least_comprehensiveness"].mean()),
         "text_random_comprehensiveness_mean": float(df["text_random_comprehensiveness"].mean()),
     }
 
