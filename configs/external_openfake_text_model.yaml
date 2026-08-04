@@ -1,0 +1,20 @@
+seed: 42
+
+text_model:
+  architecture: distilbert-base-uncased
+  max_length: 128
+  batch_size: 16
+  learning_rate: 0.00002
+  weight_decay: 0.01
+  epochs: 3
+  early_stopping_patience: 2
+  num_workers: 0
+
+paths:
+  train_csv: data/external_openfake_splits/test.csv
+  validation_csv: data/external_openfake_splits/test.csv
+  test_csv: data/external_openfake_splits/test.csv
+  checkpoint_dir: outputs/checkpoints/final_text_model
+  metrics_path: outputs/metrics/final_text_model_metrics.json
+  outputs_dir: data/external_openfake_modality_outputs
+  text_outputs_metrics_path: outputs/metrics/external_openfake_text_outputs_metrics.json

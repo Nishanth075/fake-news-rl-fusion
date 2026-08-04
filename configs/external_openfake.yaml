@@ -1,0 +1,15 @@
+seed: 42
+
+dataset:
+  name: ComplexDataLab/OpenFake
+  config_name: reddit
+  split: test
+  sample_size: 3780
+  balance_labels: true
+  text_column: prompt
+  fallback_text_column: type
+
+paths:
+  output_dir: data/external_openfake_splits
+  image_dir: data/images/openfake
+  stats_path: outputs/metrics/external_openfake_stats.json

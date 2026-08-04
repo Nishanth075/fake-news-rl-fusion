@@ -1,0 +1,9 @@
+seed: 42
+
+paths:
+  splits: [test]
+  train_outputs: data/external_openfake_modality_outputs/test_outputs.csv
+  validation_outputs: data/external_openfake_modality_outputs/test_outputs.csv
+  test_outputs: data/external_openfake_modality_outputs/test_outputs.csv
+  results_path: outputs/metrics/external_openfake_baseline_results.csv
+  summary_path: outputs/metrics/external_openfake_baseline_summary.json

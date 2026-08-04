@@ -20,9 +20,11 @@ def build_reliability_outputs(config: dict[str, Any]) -> dict[str, Any]:
     seed = int(config.get("seed", 42))
     set_seed(seed)
     rel_config = config["reliability"]
+    splits = rel_config.get("splits", SPLITS)
 
-    split_frames = {split: _load_split(rel_config, split) for split in SPLITS}
-    train_raw_image = _extract_image_raw_features(split_frames["train"], rel_config)
+    split_frames = {split: _load_split(rel_config, split) for split in splits}
+    normalization_split = "train" if "train" in split_frames else splits[0]
+    train_raw_image = _extract_image_raw_features(split_frames[normalization_split], rel_config)
     image_norm = _fit_image_normalizers(train_raw_image, rel_config)
 
     output_dir = Path(rel_config["output_dir"])
@@ -30,7 +32,7 @@ def build_reliability_outputs(config: dict[str, Any]) -> dict[str, Any]:
     stats: dict[str, Any] = {"splits": {}, "image_normalization": image_norm}
 
     for split, split_df in split_frames.items():
-        raw_image = train_raw_image if split == "train" else _extract_image_raw_features(split_df, rel_config)
+        raw_image = train_raw_image if split == normalization_split else _extract_image_raw_features(split_df, rel_config)
         image_quality = _normalize_image_features(raw_image, image_norm, rel_config)
         text_quality = _extract_text_quality(split_df, rel_config)
         merged = _merge_outputs(split, split_df, image_quality, text_quality, rel_config)

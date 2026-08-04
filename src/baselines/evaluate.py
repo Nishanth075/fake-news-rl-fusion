@@ -23,6 +23,7 @@ METHODS = [
 def evaluate_baselines(config: dict[str, Any]) -> dict[str, Any]:
     """Evaluate deterministic fusion baselines on saved modality outputs."""
     paths = config["paths"]
+    splits = paths.get("splits", SPLITS)
     split_paths = {
         "train": paths["train_outputs"],
         "validation": paths["validation_outputs"],
@@ -30,7 +31,8 @@ def evaluate_baselines(config: dict[str, Any]) -> dict[str, Any]:
     }
     rows = []
     summary: dict[str, Any] = {"splits": {}}
-    for split, split_path in split_paths.items():
+    for split in splits:
+        split_path = split_paths[split]
         df = pd.read_csv(split_path)
         probabilities = add_baseline_probabilities(df)
         summary["splits"][split] = {}

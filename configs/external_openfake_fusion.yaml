@@ -1,0 +1,23 @@
+seed: 42
+
+fusion:
+  state_dim: 9
+  action_dim: 7
+  hidden_dims: [64, 32]
+  dropout: 0.1
+  learning_rate: 0.001
+  batch_size: 64
+  epochs: 50
+  epsilon_start: 1.0
+  epsilon_end: 0.05
+  reward_correct: 1.0
+  reward_incorrect: -1.0
+
+paths:
+  train_outputs: data/external_openfake_modality_outputs/test_outputs.csv
+  validation_outputs: data/external_openfake_modality_outputs/test_outputs.csv
+  test_outputs: data/external_openfake_modality_outputs/test_outputs.csv
+  checkpoint_dir: outputs/checkpoints/final_fusion
+  metrics_path: outputs/metrics/external_openfake_rl_fusion_metrics.json
+  validation_predictions_path: outputs/metrics/external_openfake_rl_fusion_validation_predictions.csv
+  test_predictions_path: outputs/metrics/external_openfake_rl_fusion_test_predictions.csv

@@ -1,0 +1,23 @@
+seed: 42
+
+image_model:
+  architecture: resnet18
+  pretrained: true
+  image_size: 224
+  resize_size: 256
+  batch_size: 32
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  epochs: 5
+  early_stopping_patience: 2
+  num_workers: 2
+
+paths:
+  train_csv: data/external_openfake_splits/test.csv
+  validation_csv: data/external_openfake_splits/test.csv
+  test_csv: data/external_openfake_splits/test.csv
+  image_root: .
+  checkpoint_dir: outputs/checkpoints/final_image_model
+  metrics_path: outputs/metrics/final_image_model_metrics.json
+  outputs_dir: data/external_openfake_modality_outputs
+  image_outputs_metrics_path: outputs/metrics/external_openfake_image_outputs_metrics.json
