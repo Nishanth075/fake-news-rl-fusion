@@ -159,10 +159,15 @@ def _image_cam_and_probability(
     backward_handle = target_layer.register_full_backward_hook(backward_hook)
     model.zero_grad(set_to_none=True)
     outputs = model(image_tensor)
-    probabilities = torch.softmax(outputs["logits"], dim=1)
-    predicted_label = int(torch.argmax(probabilities, dim=1)[0].detach().cpu().item())
-    target_probability = float(probabilities[0, predicted_label].detach().cpu().item())
-    outputs["logits"][0, predicted_label].backward()
+    fake_probability = torch.sigmoid(outputs["logits"])[0]
+    predicted_label = int((fake_probability >= 0.5).detach().cpu().item())
+    target_probability = float(
+        fake_probability.detach().cpu().item()
+        if predicted_label == 1
+        else (1.0 - fake_probability).detach().cpu().item()
+    )
+    target_score = outputs["logits"][0] if predicted_label == 1 else -outputs["logits"][0]
+    target_score.backward()
     forward_handle.remove()
     backward_handle.remove()
     return compute_gradcam(activations[0], gradients[0]), predicted_label, target_probability
@@ -179,8 +184,9 @@ def _score_image_probability(
     transform = build_eval_transforms(int(image_config["resize_size"]), int(image_config["image_size"]))
     with torch.no_grad():
         outputs = model(transform(image).unsqueeze(0).to(device))
-        probabilities = torch.softmax(outputs["logits"], dim=1)
-    return float(probabilities[0, target_label].detach().cpu().item())
+        fake_probability = torch.sigmoid(outputs["logits"])[0]
+    value = fake_probability if target_label == 1 else 1.0 - fake_probability
+    return float(value.detach().cpu().item())
 
 
 def _mask_image_by_cam(image: Image.Image, cam: torch.Tensor, fraction: float) -> Image.Image:
@@ -285,3 +291,4 @@ def _aggregate(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "text_salient_comprehensiveness_mean": float(df["text_salient_comprehensiveness"].mean()),
         "text_random_comprehensiveness_mean": float(df["text_random_comprehensiveness"].mean()),
     }
+
