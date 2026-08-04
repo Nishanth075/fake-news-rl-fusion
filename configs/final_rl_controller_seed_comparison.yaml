@@ -1,0 +1,8 @@
+seed: 42
+
+rl_controller_seed_comparison:
+  seeds: [42, 7, 13]
+  controller_summary: outputs/metrics/final_controller_baseline_summary.csv
+  rl_predictions_pattern: outputs/metrics/seed_significance/rl_seed_{seed}_test_predictions.csv
+  summary_path: outputs/metrics/final_rl_controller_seed_comparison.csv
+  details_path: outputs/metrics/final_rl_controller_seed_comparison.json
