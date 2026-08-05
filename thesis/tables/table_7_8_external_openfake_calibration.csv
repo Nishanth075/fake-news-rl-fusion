@@ -1,0 +1,5 @@
+Method,Selected threshold,Holdout macro F1,Holdout accuracy,Holdout ROC-AUC
+text_only,0.991,0.858926,0.859127,0.859127
+rl_adaptive_fusion,0.889,0.489392,0.490410,0.474842
+equal_fusion,0.894,0.484248,0.485450,0.478006
+image_only,0.788,0.480838,0.481812,0.468784

@@ -1,0 +1,5 @@
+method,threshold_selected_on_20pct_calibration,holdout_macro_f1,holdout_accuracy,holdout_roc_auc,holdout_confusion_matrix,calibration_macro_f1
+text_only,0.991,0.858926,0.859127,0.859127,"[[1242, 270], [156, 1356]]",0.847787
+rl_adaptive_fusion,0.889,0.489392,0.490410,0.474842,"[[809, 703], [838, 674]]",0.490909
+equal_fusion,0.894,0.484248,0.485450,0.478006,"[[807, 705], [851, 661]]",0.489518
+image_only,0.788,0.480838,0.481812,0.468784,"[[794, 718], [849, 663]]",0.488258

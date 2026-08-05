@@ -168,6 +168,15 @@ Missing images were not synthetically filled; unavailable images were excluded f
 
 **Answer:** In the main final run at seed `42`, RL gave a small improvement over equal fusion (`0.8676` vs `0.8673` macro F1, and `0.8685` after threshold tuning). I also ran a small additional seed check. The improvement varied across seeds, so I describe the performance gain cautiously rather than as a large statistical margin. The main defended contribution is the adaptive and explainable fusion mechanism.
 
+
+## External Generalization Case Study
+
+**Question:** Did you test outside Fakeddit?
+
+**Answer:** Yes. I added an external OpenFake Reddit test-only case study with `3,780` balanced samples. It was not used for training or model selection. The result showed strong domain shift: the image branch and Fakeddit-trained RL fusion policy did not transfer well zero-shot. However, the text branch preserved ranking signal and reached `0.8589` macro F1 on the 80 percent holdout after threshold calibration using only 20 percent of OpenFake.
+
+**Safe interpretation:** This does not prove universal generalization. It shows that external deployment needs calibration or domain adaptation, and it gives a concrete future-work direction backed by evidence rather than only speculation.
+
 ## Best Final Claim
 
 Use this wording:

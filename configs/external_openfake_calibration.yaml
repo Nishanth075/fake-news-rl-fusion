@@ -1,0 +1,11 @@
+seed: 42
+dataset: OpenFake reddit/test
+
+calibration:
+  fraction: 0.2
+
+paths:
+  modality_outputs: data/external_openfake_modality_outputs/test_outputs.csv
+  rl_predictions: outputs/metrics/external_openfake_rl_fusion_test_predictions.csv
+  summary_path: outputs/metrics/external_openfake_calibration_holdout.csv
+  metrics_path: outputs/metrics/external_openfake_calibration_holdout.json
