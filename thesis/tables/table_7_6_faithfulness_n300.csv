@@ -1,0 +1,3 @@
+explanation_test,samples,salient_or_selected,control,interpretation
+image deletion,300,0.1260,random 0.1858,Grad-CAM evidence weak in this metric
+text deletion,300,0.1562,least 0.0631; random 0.1195,token saliency shows positive faithfulness

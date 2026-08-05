@@ -1,0 +1,6 @@
+stage,requested_or_source,available,failed_or_removed,evidence
+Full prepared metadata,682661,682661,0,fakeddit_stats.json
+Final requested subset,28000,26471,1529 failed image downloads,final image download summary
+Train split,20000 requested,18893,1107 failed,final_splits_available/train.csv
+Validation split,4000 requested,3798,202 failed,final_splits_available/validation.csv
+Test split,4000 requested,3780,220 failed,final_splits_available/test.csv

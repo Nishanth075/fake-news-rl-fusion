@@ -1,0 +1,7 @@
+examiner_question,test_or_evidence,main_finding
+Novelty and architecture difference,adaptive fusion architecture; same-state controller baselines,sample-level RL action and weights provide inspectable fusion
+Baseline comparison,image/text/equal/confidence/reliability/MLP/RL comparisons,RL competitive; threshold-tuned RL macro F1 0.8685
+Why reliability features,state ablation,full reliability state outperformed probability-only and confidence states
+Dataset filtering,download and validation statistics,"26,471 final multimodal rows retained; failures recorded"
+Generalizability,threats-to-validity analysis,claims restricted to Fakeddit; cross-dataset work remains future work
+Explainability,"Grad-CAM, token saliency, fusion weights, N=300 faithfulness",text saliency positive; image faithfulness remains limited

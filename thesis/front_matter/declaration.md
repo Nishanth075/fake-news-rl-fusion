@@ -1,0 +1,15 @@
+# Declaration
+
+I declare that this is my own work and this thesis does not incorporate without acknowledgement any material previously submitted for a degree or diploma in any other University or Institute of higher learning and, to the best of my knowledge and belief, it does not contain any material previously published or written by another person except where the acknowledgement is made in the text. I retain the right to use this content in whole or part in future works such as articles or books.
+
+Signature:
+
+Date:
+
+The above candidate has carried out research for the undergraduate thesis under my supervision. I confirm that the declaration made above by the student is true and correct.
+
+Name of Supervisor: Dr. Romesh Thanuja
+
+Signature of the Supervisor:
+
+Date:

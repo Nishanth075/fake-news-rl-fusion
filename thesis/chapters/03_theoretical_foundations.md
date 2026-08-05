@@ -1,0 +1,57 @@
+# Chapter 3: Theoretical Foundations of Reliability-Aware Adaptive Fusion
+
+## 3.1 Introduction
+
+This chapter presents the theoretical and technological foundations used in the proposed framework. The framework combines deep learning-based image classification, transformer-based text classification, reinforcement learning-based fusion, reliability estimation, and explainable AI. The chapter explains why these technologies were selected and how they support the research gap identified in Chapter 2.
+
+## 3.2 Multimodal Representation Learning
+
+Multimodal representation learning studies how information from different data types can be represented and combined. In fake news detection, the most common modalities are text and image. Text provides semantic information such as claims, captions, named entities, and emotional wording. Images provide visual evidence such as objects, scenes, screenshots, or manipulated content.
+
+There are three broad fusion levels. Early fusion combines raw or low-level features before deeper processing. Intermediate fusion combines learned feature representations. Late fusion combines prediction scores or decisions from separate branches. This thesis uses a late-fusion design because the image and text branches can be trained and evaluated separately, and the fusion controller can operate on compact reliability features rather than high-dimensional embeddings.
+
+The advantage of this design is interpretability. Since the controller receives explicit image and text probabilities, confidence values, and quality indicators, the selected fusion action can be traced back to understandable state features. The limitation is that the controller may not capture all fine-grained cross-modal semantic interactions that an end-to-end multimodal transformer might learn.
+
+## 3.3 Transformer-Based Text Modelling
+
+Transformer-based language models use self-attention mechanisms to learn contextual representations of tokens. BERT demonstrated the value of bidirectional pretraining by conditioning on both left and right context [4]. DistilBERT compressed BERT through knowledge distillation to produce a lighter model suitable for lower-resource settings [5].
+
+This thesis uses DistilBERT as the text branch because the dataset contains short social media titles and captions, and contextual representation is useful for this type of text. The model receives cleaned text, encodes it using the pretrained language model, and produces a binary prediction probability. The text branch probability and confidence are later used by the fusion controller.
+
+Theoretical strengths of transformer-based text modelling include contextual token representation, transfer learning from large corpora, and effective fine-tuning. Limitations include computational cost, sensitivity to dataset bias, and possible overfitting when the training data contains topic-specific cues.
+
+## 3.4 Convolutional Image Modelling and Residual Networks
+
+Convolutional neural networks learn hierarchical visual features from images. Lower layers often represent edges and textures, while deeper layers represent more task-specific patterns. ResNet introduced residual connections that help train deeper networks by allowing layers to learn residual functions [6].
+
+This thesis uses a ResNet-based image branch because residual networks are reliable and widely used for image classification. The image branch receives downloaded images from the multimodal dataset and produces a binary prediction probability. This probability, together with confidence and image quality features, becomes part of the fusion state.
+
+The image branch is important because visual content can contain evidence not available in text. However, image-only detection can be difficult when the image is ambiguous, irrelevant, low quality, or only meaningful when interpreted with the text. This supports the need for adaptive fusion rather than unimodal prediction.
+
+## 3.5 Reinforcement Learning and Action-Selection Policies
+
+Reinforcement learning studies how an agent can learn to select actions based on rewards. Deep reinforcement learning combines reinforcement learning with neural networks to approximate action-value functions or policies. Mnih et al. showed that a deep Q-network could learn control policies from high-dimensional inputs [7]. In this thesis, the input is not a raw visual state but a compact reliability-aware state.
+
+The proposed fusion controller treats each sample as a state. The action corresponds to a selected image-text weight pair. The reward is based on whether the final fused prediction is correct. This formulation is appropriate because the task is not only to classify a sample but to decide which fusion behaviour should be used for that sample.
+
+The reinforcement learning formulation provides two benefits. First, it makes fusion an explicit decision process. Second, the selected action can be inspected after prediction. The main limitation is that reinforcement learning can be sensitive to training configuration, reward design, and random seed, especially when the performance difference between actions is small.
+
+## 3.6 Reliability Estimation for Image and Text Modalities
+
+Reliability estimation attempts to measure whether a modality should be trusted for a particular sample. This thesis uses engineered reliability features rather than ground-truth reliability labels. For the image modality, quality indicators include features related to blur, contrast, entropy, and related image statistics. For the text modality, quality indicators are based on textual properties such as length and availability.
+
+Confidence is another reliability signal. A prediction probability close to 0 or 1 indicates higher model confidence, while a probability near 0.5 indicates uncertainty. Disagreement between image and text predictions is also important because a sample where both branches agree may require less complex fusion than a sample where they conflict.
+
+These reliability features are not perfect measures of truth. They are heuristic signals designed to support the fusion controller. The evaluation therefore includes ablation and policy analysis to test whether the reliability-aware state improves performance and produces meaningful weight patterns.
+
+## 3.7 Explainable AI for Multimodal Decisions
+
+Explainable AI aims to make model decisions more understandable to users and developers. In image classification, Grad-CAM uses gradients flowing into convolutional layers to produce heatmaps that highlight influential visual regions [8]. In text classification, token saliency can identify tokens that contributed strongly to the model output.
+
+For multimodal fake news detection, explanation should include both branch-level and fusion-level information. Branch-level explanations show what influenced the image and text classifiers. Fusion-level explanations show how the modalities were combined. The proposed framework therefore records selected action, image weight, text weight, final probability, and final prediction together with branch-level explanation artifacts.
+
+This approach improves transparency but does not fully prove explanation faithfulness. A future extension should evaluate explanations using perturbation tests, user studies, or quantitative faithfulness metrics.
+
+## 3.8 Summary
+
+This chapter explained the theoretical foundations of the proposed framework: multimodal representation learning, transformer-based text modelling, residual image modelling, reinforcement learning, reliability estimation, and explainable AI. These foundations support the proposed reliability-aware adaptive fusion mechanism described in Chapter 4.

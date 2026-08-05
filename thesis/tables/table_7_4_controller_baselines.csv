@@ -1,0 +1,6 @@
+method,state_dim,validation_macro_f1,test_macro_f1,test_accuracy
+state_logistic_regression,9,0.8541,0.8470,0.8471
+state_decision_tree_depth_3,9,0.8576,0.8523,0.8524
+state_decision_tree_depth_5,9,0.8604,0.8529,0.8529
+state_decision_tree_unlimited,9,0.8541,0.8473,0.8474
+rl_adaptive_fusion_seed_42,9,0.8678,0.8676,0.8677

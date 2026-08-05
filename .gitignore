@@ -216,3 +216,18 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# LaTeX build outputs. Source .tex files, figures, tables and final PDFs are tracked.
+*.aux
+*.lof
+*.log
+*.lot
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Local thesis rendering scratch folders.
+tmp/
+tmp_pdf_pages/

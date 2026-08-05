@@ -1,0 +1,2 @@
+comparison,threshold,rows,baseline_method,baseline_macro_f1,rl_macro_f1,delta_macro_f1,baseline_accuracy,rl_accuracy,delta_accuracy,baseline_roc_auc,rl_roc_auc,mcnemar_b,mcnemar_c,mcnemar_discordant,mcnemar_p_value
+rl_adaptive_fusion_vs_equal_fusion,0.5,3780,equal_fusion,0.8673332160630083,0.8676044474818365,0.00027123141882823276,0.8674603174603175,0.8677248677248677,0.0002645502645501896,0.9325416824862439,0.9328939130746426,2,1,3,1.0

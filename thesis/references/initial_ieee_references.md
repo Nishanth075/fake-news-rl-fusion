@@ -1,0 +1,37 @@
+﻿# References
+
+
+[1] K. Shu, A. Sliva, S. Wang, J. Tang, and H. Liu, "Fake News Detection on Social Media: A Data Mining Perspective," ACM SIGKDD Explorations Newsletter, vol. 19, no. 1, pp. 22-36, 2017, doi: 10.1145/3137597.3137600.
+
+[2] Y. Wang et al., "EANN: Event Adversarial Neural Networks for Multi-Modal Fake News Detection," in Proc. 24th ACM SIGKDD Int. Conf. Knowledge Discovery and Data Mining, 2018, pp. 849-857, doi: 10.1145/3219819.3219903.
+
+[3] K. Nakamura, S. Levy, and W. Y. Wang, "r/Fakeddit: A New Multimodal Benchmark Dataset for Fine-grained Fake News Detection," arXiv:1911.03854, 2019.
+
+[4] J. Devlin, M.-W. Chang, K. Lee, and K. Toutanova, "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding," in Proc. NAACL-HLT, 2019, pp. 4171-4186, doi: 10.18653/v1/N19-1423.
+
+[5] V. Sanh, L. Debut, J. Chaumond, and T. Wolf, "DistilBERT, a distilled version of BERT: smaller, faster, cheaper and lighter," arXiv:1910.01108, 2019.
+
+[6] K. He, X. Zhang, S. Ren, and J. Sun, "Deep Residual Learning for Image Recognition," in Proc. IEEE Conf. Computer Vision and Pattern Recognition, 2016, pp. 770-778, doi: 10.1109/CVPR.2016.90.
+
+[7] V. Mnih et al., "Human-level control through deep reinforcement learning," Nature, vol. 518, pp. 529-533, 2015, doi: 10.1038/nature14236.
+
+[8] R. R. Selvaraju et al., "Grad-CAM: Visual Explanations from Deep Networks via Gradient-Based Localization," in Proc. IEEE Int. Conf. Computer Vision, 2017, doi: 10.1109/ICCV.2017.74.
+
+[9] X. Zhou, J. Wu, and R. Zafarani, "SAFE: Similarity-Aware Multi-modal Fake News Detection," in Proc. PAKDD, 2020, pp. 354-367, doi: 10.1007/978-3-030-47436-2_27.
+
+[10] J. Jing, H. Wu, J. Sun, X. Fang, and H. Zhang, "Multimodal fake news detection via progressive fusion networks," Information Processing & Management, vol. 60, no. 1, Art. no. 103120, 2023, doi: 10.1016/j.ipm.2022.103120.
+
+[11] S. Xiong, G. Zhang, V. Batra, L. Xi, L. Shi, and L. Liu, "TRIMOON: Two-Round Inconsistency-based Multi-modal fusion Network for fake news detection," Information Fusion, vol. 93, pp. 150-158, 2023, doi: 10.1016/j.inffus.2022.12.016.
+
+[12] Y. Jiang, X. Yu, Y. Wang, X. Xu, X. Song, and D. Maynard, "Similarity-aware multimodal prompt learning for fake news detection," Information Sciences, vol. 647, Art. no. 119446, 2023, doi: 10.1016/j.ins.2023.119446.
+
+[13] J. Ma, L. Zhang, Y. Liu, and W. Zhang, "Multi-Task Network Guided Multimodal Fusion for Fake News Detection," in Proc. 16th Asian Conf. Machine Learning, PMLR, vol. 260, pp. 813-828, 2025.
+
+[14] W. Lu, Y. Tong, and Z. Ye, "DAMMFND: Domain-Aware Multimodal Multi-view Fake News Detection," Proc. AAAI Conf. Artificial Intelligence, vol. 39, no. 1, pp. 559-567, 2025, doi: 10.1609/aaai.v39i1.32036.
+
+[15] J. Shen, Y. Wang, S. Wang, Y. Zhang, and H. Liu, "Multi-modal Similarity Guided Adaptive Fusion Network for Short Video Fake News Detection," in Proc. Int. Conf. Multimedia Retrieval, 2025, pp. 1145-1153, doi: 10.1145/3731715.3733400.
+
+[16] Y. K. Zamil and N. M. Charkari, "Combating Fake News on Social Media: A Fusion Approach for Improved Detection and Interpretability," IEEE Access, vol. 12, pp. 2074-2085, 2024, doi: 10.1109/ACCESS.2023.3342843.
+
+[17] R. Jadhav, V. Meshram, A. Bhosle, K. Patil, S. Dash, and S. Jadhav, "Explainable multilingual and multimodal fake-news detection: toward robust and trustworthy AI for combating misinformation," Frontiers in Artificial Intelligence, vol. 8, Art. no. 1690616, 2025, doi: 10.3389/frai.2025.1690616.
+

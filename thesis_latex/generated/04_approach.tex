@@ -1,0 +1,165 @@
+\chapter{RL-Based Adaptive Image-Text Fusion Approach}
+
+
+\section{4.1 Introduction}
+
+
+This chapter presents the conceptual approach proposed in this research. The purpose of the approach is to extend multimodal fake news detection by replacing a fixed image-text fusion rule with an adaptive and explainable fusion policy. The approach treats fusion as an action-selection problem in which a reinforcement learning controller observes reliability-related features and selects how much influence should be assigned to the image and text branches.
+
+
+\section{4.2 Hypothesis and Inspiration}
+
+
+The hypothesis of this research is that a reliability-aware adaptive fusion policy can provide competitive fake news detection performance while making the modality contribution more explainable at sample level. The approach is inspired by the observation that image and text evidence are not equally reliable for every social media post. A fixed fusion method applies the same rule even when one modality is uncertain, noisy, or in conflict with the other modality. An adaptive policy can instead select a fusion action based on the observed reliability state of the sample.
+
+
+\section{4.3 Inputs and Outputs of the Proposed Extension}
+
+
+The inputs to the proposed extension are the outputs of the image and text branches, together with reliability indicators derived from the sample. The image branch produces an image probability and an image confidence value. The text branch produces a text probability and a text confidence value. Additional reliability indicators represent image quality, text quality, modality disagreement, confidence difference, and quality difference.
+
+
+The main output is a binary fake news prediction using the label standard 0 for real and 1 for fake. The framework also outputs the final probability, selected fusion action, image weight, text weight, and explanation artifacts. These outputs make the decision more inspectable than a prediction label alone.
+
+
+\section{4.4 Process Workflow of the Proposed Extension}
+
+
+The proposed workflow contains six conceptual stages, as illustrated in Figure 4.1. First, the dataset is prepared and labels are standardized. Second, the image and text branches are trained separately. Third, both branches generate prediction probabilities for each split. Fourth, reliability features are computed and merged with modality predictions. Fifth, the reinforcement learning fusion controller selects a fusion action for each sample. Sixth, the framework generates classification metrics, policy analysis, robustness results, and explanation outputs.
+
+
+The process is designed to separate unimodal representation learning from adaptive decision fusion. This separation allows the fusion controller to remain lightweight, because it uses a compact reliability-aware state instead of processing raw images or raw text directly.
+
+
+The architectural novelty is the replacement of a fixed post-hoc fusion rule with a sample-level controller that observes reliability evidence before assigning modality weights. The novelty comparison diagram in this chapter makes this distinction explicit by separating simple fixed fusion from the proposed reliability-aware action-selection path.
+
+
+\section{4.5 Reliability-Aware State Representation}
+
+
+The reliability-aware state is the main input to the fusion controller. It contains:
+
+
+1. Image prediction probability.
+
+2. Image confidence.
+
+3. Image quality.
+
+4. Text prediction probability.
+
+5. Text confidence.
+
+6. Text quality.
+
+7. Modality disagreement.
+
+8. Confidence difference.
+
+9. Quality difference.
+
+
+This state representation was selected to capture both branch-level prediction strength and cross-modal conflict. The image and text probabilities represent the direct unimodal evidence. The confidence features represent prediction certainty. The quality features provide engineered reliability cues. Disagreement and difference features help the controller identify samples where the modalities may require more careful balancing.
+
+
+\section{4.6 Adaptive Fusion Action Space}
+
+
+The reinforcement learning controller selects from a discrete set of fusion actions. Each action maps to a fixed pair of image and text weights. This design makes the policy easy to interpret because each selected action can be directly translated into a modality trust decision. A continuous action space may provide finer control, but the discrete action space was selected for simplicity, stability, and explainability.
+
+
+\section{4.7 Reward Design}
+
+
+The reward is based on whether the fused prediction is correct. If the selected fusion action leads to a correct prediction, the controller receives a positive reward. If the prediction is incorrect, it receives a negative reward. This binary reward directly connects the policy to classification correctness.
+
+
+The reward design is intentionally simple. It supports clear interpretation but does not distinguish between highly confident and marginally correct predictions. A margin-based or log-loss-based reward is therefore identified as a possible future improvement.
+
+
+\section{4.8 Explanation Strategy}
+
+
+The framework provides explanation at three levels. At the image level, Grad-CAM heatmaps highlight visual regions that contributed to the image prediction. At the text level, token saliency identifies influential tokens from the text branch. At the fusion level, the selected action, image weight, text weight, final probability, and final prediction explain how the modalities were combined.
+
+
+This explanation strategy is aligned with the research problem because it does not stop at model performance. It also provides evidence about why the final prediction was formed in a particular way.
+
+
+\section{4.9 Positioning within the AI Body of Knowledge}
+
+
+The proposed extension lies at the intersection of multimodal learning, reinforcement learning, and explainable AI. The image and text branches provide unimodal deep learning representations. The fusion controller applies reinforcement learning to select a decision action based on a compact state. The explanation layer supports interpretability by exposing modality weights and branch-level saliency.
+
+
+The contribution is not the invention of a new image encoder or language model. Instead, the contribution is the use of a reliability-aware reinforcement learning controller to make image-text fusion adaptive and inspectable for fake news detection.
+
+
+\section{4.10 Summary}
+
+
+This chapter presented the proposed RL-based adaptive image-text fusion approach. The approach uses separate image and text branches, a reliability-aware state representation, a discrete fusion action space, and explanation outputs. The next chapter converts this conceptual approach into a system-level analysis and design.
+
+The image and text branches are represented by functions that output fake-class probabilities:
+
+\begin{equation}
+p_i = f_i(x_i), \qquad p_t = f_t(x_t)
+\label{eq:unimodal_probabilities}
+\end{equation}
+
+The confidence of each modality is computed from the stronger binary-class probability:
+
+\begin{equation}
+c_m = \max(p_m, 1-p_m), \qquad m \in \{i,t\}
+\label{eq:modality_confidence}
+\end{equation}
+
+The reliability-aware state used by the fusion controller is defined as:
+
+\begin{equation}
+s = [p_i, c_i, q_i, p_t, c_t, q_t, |p_i-p_t|, c_i-c_t, q_i-q_t]
+\label{eq:reliability_state}
+\end{equation}
+
+\input{figures/research_architecture_tikz.tex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.92\textwidth,height=0.42\textheight,keepaspectratio]{figures/figure_4_2_novelty_architecture_difference.png}
+\caption{Structural difference between fixed fusion and the proposed reliability-aware adaptive fusion controller.}
+\label{fig:novelty_architecture_difference}
+\end{figure}
+
+Each discrete action maps to an interpretable image-text weighting pair:
+
+\begin{equation}
+\begin{aligned}\mathcal{A}=\{&(0.90,0.10),(0.75,0.25),(0.60,0.40),(0.50,0.50),\\ &(0.40,0.60),(0.25,0.75),(0.10,0.90)\}\end{aligned}
+\label{eq:action_space}
+\end{equation}
+
+\begin{equation}
+a_k \mapsto (w_i^{(k)}, w_t^{(k)}), \qquad w_i^{(k)} + w_t^{(k)} = 1
+\label{eq:action_weight_mapping}
+\end{equation}
+
+The final fake-class probability is then produced by weighted late fusion:
+
+\begin{equation}
+p_f = w_i^{(k)}p_i + w_t^{(k)}p_t
+\label{eq:fused_probability}
+\end{equation}
+
+The binary decision rule is:
+
+\begin{equation}
+\hat{y}=\begin{cases}1, & p_f \ge \tau \\ 0, & p_f < \tau\end{cases}
+\label{eq:prediction_rule}
+\end{equation}
+
+The reward function links the selected fusion action directly to classification correctness:
+
+\begin{equation}
+r(s,a_k)=\begin{cases}+1, & \hat{y}=y \\ -1, & \hat{y}\ne y\end{cases}
+\label{eq:reward_function}
+\end{equation}
+
+\clearpage

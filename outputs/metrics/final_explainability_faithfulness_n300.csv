@@ -1,0 +1,2 @@
+rows,image_salient_comprehensiveness_mean,image_random_comprehensiveness_mean,text_salient_comprehensiveness_mean,text_least_comprehensiveness_mean,text_random_comprehensiveness_mean,metric_note
+300,0.12595064888397853,0.18579854875802992,0.1561762981209904,0.06311631468435129,0.11950221344906216,"comprehensiveness = original predicted-class probability minus probability after deleting salient evidence; larger positive values indicate more faithful explanations."
