@@ -32,7 +32,7 @@ The final evaluation used 26,471 available multimodal samples from the Fakeddit-
 
 The ablation study showed that the full reliability-aware state improved over reduced state representations. Probabilities alone achieved 0.8523 test macro F1, prediction and confidence achieved 0.8590, and the full reliability state achieved 0.8673. This supports the usefulness of reliability-aware state features.
 
-The matched supervised MLP fusion baseline achieved 0.8547 macro F1 at the default threshold and 0.8565 after threshold tuning. The RL fusion result was higher in the main final run. However, multi-seed checks showed that the RL improvement was not stable across all tested seeds. Therefore, the performance conclusion is stated cautiously.
+The matched supervised MLP fusion baseline achieved 0.8547 macro F1 at the default threshold and 0.8565 after threshold tuning. The RL fusion result was higher in the main final run, and paired McNemar testing showed a significant difference against the matched supervised MLP controller (p=0.000045). However, multi-seed checks showed that the RL improvement over fixed fusion was not stable across all tested seeds. Therefore, the performance conclusion is stated cautiously.
 
 ## 8.5 Limitations of the Study
 
@@ -42,7 +42,7 @@ The second limitation is seed stability. The main RL run achieved a modest impro
 
 The third limitation is text-branch overfitting. The text branch showed a large train-test performance gap. Although validation-based checkpoint selection was used, stronger regularization should be investigated.
 
-The fourth limitation is explainability validation. The framework generated qualitative Grad-CAM and token-saliency explanations, but it did not include a quantitative faithfulness evaluation.
+The fourth limitation is explainability validation. A deletion-based faithfulness check was conducted on 300 samples, but the results were mixed: text token saliency showed positive faithfulness, while image Grad-CAM did not outperform random image-region deletion in this metric. Therefore, image explanations should be treated as qualitative visual evidence rather than fully validated causal explanations.
 
 The fifth limitation is the simplicity of the reward function. The binary reward supports clear training but does not reward calibration or probability margin.
 
@@ -56,8 +56,8 @@ Future work should evaluate the framework on additional multimodal fake news dat
 
 The text branch could be improved using stronger regularization, validation-loss-aware checkpoint selection, or domain-specific pretraining. The reward function could be extended from binary correctness to margin-based or log-loss-based rewards. The action space could also be expanded or converted into a continuous policy if higher fusion precision is required.
 
-Finally, explainability could be evaluated using faithfulness metrics, perturbation tests, or human-centered studies to determine whether the generated explanations are useful and trustworthy.
+Finally, explainability evaluation should be expanded beyond the current deletion-based check using insertion tests, larger perturbation protocols, and human-centered studies to determine whether the generated explanations are useful and trustworthy.
 
 ## 8.8 Summary
 
-This thesis presented an explainable reinforcement learning-based adaptive fusion framework for multimodal fake news detection. The framework achieved competitive performance against strong baselines and provided sample-level fusion explanations through modality weights and saliency outputs. The research demonstrates that adaptive fusion is a useful direction for explainable fake news detection, while also identifying stability, generalizability, and explainability validation as important future work.
+This thesis presented an explainable reinforcement learning-based adaptive fusion framework for multimodal fake news detection. The framework achieved competitive performance against strong baselines and provided sample-level fusion explanations through modality weights and saliency outputs. The research demonstrates that adaptive fusion is a useful direction for explainable fake news detection, particularly when compared with matched learned controller baselines, while also identifying stability, generalizability, and expanded explainability validation as important future work.

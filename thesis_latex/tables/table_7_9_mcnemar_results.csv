@@ -1,0 +1,4 @@
+comparison,b,c,p_value,significant,interpretation
+RL vs equal fusion,2,1,1.000000,No,competitive but not statistically different
+RL vs confidence-weighted fusion,2,1,1.000000,No,competitive but not statistically different
+RL vs matched supervised MLP,95,46,0.000045,Yes,RL correct more often on discordant samples

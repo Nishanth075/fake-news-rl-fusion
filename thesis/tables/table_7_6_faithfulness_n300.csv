@@ -1,3 +1,4 @@
-explanation_test,samples,salient_or_selected,control,interpretation
-image deletion,300,0.1260,random 0.1858,Grad-CAM evidence weak in this metric
-text deletion,300,0.1562,least 0.0631; random 0.1195,token saliency shows positive faithfulness
+explanation_test,samples,salient_score,control_score,margin,passes,interpretation
+image Grad-CAM deletion,300,0.1260,random 0.1858,-0.0598,No,Grad-CAM remains qualitative for this experiment
+text token deletion vs least-salient,300,0.1562,least 0.0631,0.0931,Yes,token saliency supports faithfulness
+text token deletion vs random,300,0.1562,random 0.1195,0.0367,Yes,token saliency stronger than random deletion

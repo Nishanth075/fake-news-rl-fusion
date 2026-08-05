@@ -57,6 +57,8 @@ The improvement over the strongest fixed fusion baseline was modest. Therefore, 
 
 The matched supervised MLP fusion baseline reached 0.8547 macro F1 at the default threshold and 0.8565 macro F1 after threshold tuning. This fairer comparison used the matched supervised fusion evidence files and shows that the adaptive RL fusion result remained stronger in the final reported run.
 
+A paired McNemar audit aligned predictions by sample identifier before testing. The RL adaptive fusion run was not significantly different from equal fusion or confidence-weighted fusion at the default threshold (both p=1.0000). Against the matched supervised MLP fusion controller, however, the RL controller produced significantly more correct discordant decisions (b=95, c=46, p=0.000045). This supports the claim that the learned RL controller improved over the matched supervised controller, while fixed-fusion superiority remains a cautious and non-significant claim.
+
 
 \section{7.8 Ablation Study}
 
@@ -94,7 +96,7 @@ A larger faithfulness check was conducted on 300 final test samples. Text salien
 \section{7.12 Seed Stability and Statistical Considerations}
 
 
-A small multi-seed check and a controller-baseline seed comparison were conducted for the RL fusion controller. The main seed 42 run achieved a small improvement over equal fusion. However, additional seeds showed lower RL macro F1 than the equal-fusion baseline. This indicates that the RL controller was sensitive to random seed and training conditions. The thesis therefore avoids claiming statistically proven superiority over equal fusion. The safer conclusion is that the proposed model demonstrates adaptive and explainable fusion with competitive performance, while training stability remains a limitation.
+A small multi-seed check and a controller-baseline seed comparison were conducted for the RL fusion controller. The selected seed 42 run achieved 0.8676 macro F1, compared with 0.8673 for equal fusion. However, the paired McNemar test against equal fusion was not significant (p=1.0000), and additional seeds produced lower RL macro F1 than the equal-fusion baseline. Across seeds 42, 7, and 13, RL adaptive fusion achieved mean macro F1 of 0.8594 with a standard deviation of 0.0072. In contrast, the same-state decision-tree controller achieved 0.8529 macro F1, and the RL controller exceeded that controller in all three tested seeds. The thesis therefore avoids claiming statistically proven superiority over fixed fusion. The safer conclusion is that the proposed model demonstrates adaptive and explainable fusion with competitive performance, stronger performance than matched learned controller baselines, and a remaining need for improved seed stability.
 
 
 \section{7.13 Discussion of Findings}
@@ -103,7 +105,7 @@ A small multi-seed check and a controller-baseline seed comparison were conducte
 The evaluation supports the usefulness of multimodal fusion because fusion methods outperformed both image-only and text-only baselines. It also supports the value of reliability-aware state features because the full state outperformed reduced ablation settings. The adaptive fusion model provided interpretable modality weights and action records, which directly addressed the explainability aspect of the research problem.
 
 
-At the same time, the performance difference between RL adaptive fusion and strong fixed fusion was small. This suggests that the final data split contains strong complementarity between image and text predictions that can already be captured by simple fusion. The proposed framework is therefore best defended as an explainable adaptive fusion framework with competitive performance and modest main-run improvement, not as a method that universally dominates fixed fusion.
+At the same time, the performance difference between RL adaptive fusion and strong fixed fusion was small. This suggests that the final data split contains strong complementarity between image and text predictions that can already be captured by simple fusion. The proposed framework is therefore best defended as an explainable adaptive fusion framework with competitive performance and modest main-run difference, not as a method that universally dominates fixed fusion.
 
 
 
@@ -278,12 +280,13 @@ Comp(E)=P(y_c\mid x)-P(y_c\mid x_{\setminus E})
 \tiny
 \caption{Explainability faithfulness summary for image and text evidence deletion.}
 \label{tab:faithfulness_n300}
-\begin{tabularx}{\textwidth}{YYYYY}
+\begin{tabularx}{\textwidth}{YYYYYY}
 \toprule
-explanation\_\allowbreak test & samples & salient\_\allowbreak or\_\allowbreak selected & control & interpretation \\
+explanation\_\allowbreak test & samples & salient & control & margin & finding \\
 \midrule
-image deletion & 300 & 0.1260 & random 0.1858 & Grad-CAM evidence weak in this metric \\
-text deletion & 300 & 0.1562 & least 0.0631; random 0.1195 & token saliency shows positive faithfulness \\
+image Grad-CAM deletion & 300 & 0.1260 & random 0.1858 & -0.0598 & not passed \\
+text saliency vs least-salient deletion & 300 & 0.1562 & 0.0631 & 0.0931 & passed \\
+text saliency vs random deletion & 300 & 0.1562 & 0.1195 & 0.0367 & passed \\
 \bottomrule
 \end{tabularx}
 \end{table}

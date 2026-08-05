@@ -38,6 +38,8 @@ The improvement over the strongest fixed fusion baseline was modest. Therefore, 
 
 The matched supervised MLP fusion baseline reached 0.8547 macro F1 at the default threshold and 0.8565 macro F1 after threshold tuning. This fairer comparison used the matched supervised fusion evidence files and shows that the adaptive RL fusion result remained stronger in the final reported run.
 
+A paired McNemar audit aligned predictions by sample identifier before testing. The RL adaptive fusion run was not significantly different from equal fusion or confidence-weighted fusion at the default threshold (both p=1.0000). Against the matched supervised MLP fusion controller, however, the RL controller produced significantly more correct discordant decisions (b=95, c=46, p=0.000045). This supports the claim that the learned RL controller improved over the matched supervised controller, while fixed-fusion superiority remains a cautious and non-significant claim.
+
 ## 7.8 Ablation Study
 
 The ablation study tested three reinforcement learning state representations and compared them with simple same-state controller baselines. The probabilities-only state achieved test macro F1 of 0.8523. Adding prediction confidence improved the score to 0.8590. The full reliability state, which included probability, confidence, quality, disagreement, confidence difference, and quality difference, achieved 0.8673. This pattern indicates that the reliability-aware features contributed meaningfully to the fusion controller.
@@ -62,13 +64,13 @@ A larger faithfulness check was conducted on 300 final test samples. Text salien
 
 ## 7.12 Seed Stability and Statistical Considerations
 
-A small multi-seed check and a controller-baseline seed comparison were conducted for the RL fusion controller. The main seed 42 run achieved a small improvement over equal fusion. However, additional seeds showed lower RL macro F1 than the equal-fusion baseline. This indicates that the RL controller was sensitive to random seed and training conditions. The thesis therefore avoids claiming statistically proven superiority over equal fusion. The safer conclusion is that the proposed model demonstrates adaptive and explainable fusion with competitive performance, while training stability remains a limitation.
+A small multi-seed check and a controller-baseline seed comparison were conducted for the RL fusion controller. The selected seed 42 run achieved 0.8676 macro F1, compared with 0.8673 for equal fusion. However, the paired McNemar test against equal fusion was not significant (p=1.0000), and additional seeds produced lower RL macro F1 than the equal-fusion baseline. Across seeds 42, 7, and 13, RL adaptive fusion achieved mean macro F1 of 0.8594 with a standard deviation of 0.0072. In contrast, the same-state decision-tree controller achieved 0.8529 macro F1, and the RL controller exceeded that controller in all three tested seeds. The thesis therefore avoids claiming statistically proven superiority over fixed fusion. The safer conclusion is that the proposed model demonstrates adaptive and explainable fusion with competitive performance, stronger performance than matched learned controller baselines, and a remaining need for improved seed stability.
 
 ## 7.13 Discussion of Findings
 
 The evaluation supports the usefulness of multimodal fusion because fusion methods outperformed both image-only and text-only baselines. It also supports the value of reliability-aware state features because the full state outperformed reduced ablation settings. The adaptive fusion model provided interpretable modality weights and action records, which directly addressed the explainability aspect of the research problem.
 
-At the same time, the performance difference between RL adaptive fusion and strong fixed fusion was small. This suggests that the final data split contains strong complementarity between image and text predictions that can already be captured by simple fusion. The proposed framework is therefore best defended as an explainable adaptive fusion framework with competitive performance and modest main-run improvement, not as a method that universally dominates fixed fusion.
+At the same time, the performance difference between RL adaptive fusion and strong fixed fusion was small. This suggests that the final data split contains strong complementarity between image and text predictions that can already be captured by simple fusion. The proposed framework is therefore best defended as an explainable adaptive fusion framework with competitive performance and modest main-run difference, not as a method that universally dominates fixed fusion.
 
 
 ## 7.14 External Generalization Case Study
@@ -84,3 +86,6 @@ This finding is important because it separates ranking transfer from calibration
 This chapter evaluated the proposed framework using final dataset statistics, unimodal results, fusion comparisons, ablation, policy analysis, robustness tests, explainability artifacts, and seed stability checks. The results show that the framework achieved competitive performance and provided sample-level adaptive explanations. The next chapter concludes the thesis by summarizing contributions, objective achievement, limitations, and future work.
 
 
+
+
+Table: Paired McNemar significance results for the main RL fusion comparison. RL vs equal fusion and confidence-weighted fusion were not statistically different (p=1.000000), while RL vs matched supervised MLP was significant (b=95, c=46, p=0.000045).
