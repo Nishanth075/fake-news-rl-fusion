@@ -1,0 +1,66 @@
+{
+  "methodology": {
+    "test": "two-sided exact McNemar test using statsmodels.stats.contingency_tables.mcnemar",
+    "alignment": "sample_id inner alignment with exact label check; row order is not trusted",
+    "b_definition": "RL correct and baseline incorrect",
+    "c_definition": "RL incorrect and baseline correct",
+    "statistic_note": "For exact McNemar tests, statsmodels reports a statistic equivalent to min(b, c).",
+    "superiority_rule": "Do not state RL is superior unless b > c, p < 0.05, and protocols are fair/matched."
+  },
+  "results": [
+    {
+      "rl_method": "rl_full_state_adaptive_fusion",
+      "baseline_method": "equal_fusion",
+      "status": "computed",
+      "n_samples": 3780,
+      "both_correct": 3278,
+      "b": 2,
+      "c": 1,
+      "both_wrong": 499,
+      "statistic": 1.0,
+      "p_value": 1.0,
+      "alpha": 0.05,
+      "significant_at_0_05": false,
+      "direction": "rl_correct_more_often_than_baseline_on_discordant_pairs",
+      "threshold_protocol": "RL=default_threshold_0.5; baseline=default_threshold_0.5_derived_from_modality_probabilities",
+      "source_rl_file": "outputs/metrics/final_rl_fusion_test_predictions.csv",
+      "source_baseline_file": "data/final_modality_outputs/test_outputs.csv"
+    },
+    {
+      "rl_method": "rl_full_state_adaptive_fusion",
+      "baseline_method": "confidence_weighted_fusion",
+      "status": "computed",
+      "n_samples": 3780,
+      "both_correct": 3278,
+      "b": 2,
+      "c": 1,
+      "both_wrong": 499,
+      "statistic": 1.0,
+      "p_value": 1.0,
+      "alpha": 0.05,
+      "significant_at_0_05": false,
+      "direction": "rl_correct_more_often_than_baseline_on_discordant_pairs",
+      "threshold_protocol": "RL=default_threshold_0.5; baseline=default_threshold_0.5_derived_from_modality_probabilities",
+      "source_rl_file": "outputs/metrics/final_rl_fusion_test_predictions.csv",
+      "source_baseline_file": "data/final_modality_outputs/test_outputs.csv"
+    },
+    {
+      "rl_method": "rl_full_state_adaptive_fusion",
+      "baseline_method": "matched_supervised_mlp_fusion",
+      "status": "computed",
+      "n_samples": 3780,
+      "both_correct": 3185,
+      "b": 95,
+      "c": 46,
+      "both_wrong": 454,
+      "statistic": 46.0,
+      "p_value": 4.49180334642226e-05,
+      "alpha": 0.05,
+      "significant_at_0_05": true,
+      "direction": "rl_correct_more_often_than_baseline_on_discordant_pairs",
+      "threshold_protocol": "RL=default_threshold_0.5; baseline=default_threshold_0.5",
+      "source_rl_file": "outputs/metrics/final_rl_fusion_test_predictions.csv",
+      "source_baseline_file": "outputs/metrics/final_supervised_fusion_matched_test_predictions.csv"
+    }
+  ]
+}

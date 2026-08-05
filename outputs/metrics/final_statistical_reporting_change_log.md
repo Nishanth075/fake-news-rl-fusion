@@ -49,10 +49,7 @@ No model training, fine-tuning, prediction regeneration, threshold alteration, r
 "The selected RL run achieved competitive performance, but its advantage over fixed fusion was marginal and must be interpreted together with paired significance testing and seed-level instability."
 
 ## Validation Checks
-- Paired prediction validation: blocked locally because one or more prediction/source CSV files are missing.
-  - rl_full_state_adaptive_fusion vs equal_fusion: missing file: outputs/metrics/final_rl_fusion_test_predictions.csv; missing file: data/final_modality_outputs/test_outputs.csv
-  - rl_full_state_adaptive_fusion vs confidence_weighted_fusion: missing file: outputs/metrics/final_rl_fusion_test_predictions.csv; missing file: data/final_modality_outputs/test_outputs.csv
-  - rl_full_state_adaptive_fusion vs matched_supervised_mlp_fusion: missing file: outputs/metrics/final_rl_fusion_test_predictions.csv; missing file: outputs/metrics/final_supervised_fusion_matched_test_predictions.csv
+- Paired prediction validation: all files aligned by sample ID and label.
 - CSV outputs were written from saved metrics/prediction sources only.
 - No training script was called by this audit.
 - No original prediction file was overwritten.
