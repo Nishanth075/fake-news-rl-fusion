@@ -1,34 +1,34 @@
 # Chapter 1: Introduction
 
-## 1.1 Introduction
+## Introduction
 
 Social media platforms have become major channels for the creation, consumption, and circulation of news. Their speed, openness, and low publication cost allow useful information to spread quickly, but the same properties also allow misleading and fabricated content to reach large audiences. Fake news detection has therefore become an important research problem in artificial intelligence because it requires automated methods that can analyse uncertain, noisy, and rapidly changing online content.
 
-Many social media posts are multimodal. A post may contain a title or caption, an image, metadata, and user responses. Text can provide direct semantic evidence, while an image can provide contextual or visual evidence. However, the reliability of each modality is not constant. Some posts contain informative text but weak or irrelevant images, while others contain images that strongly influence the veracity decision. This thesis focuses on the problem of making the fusion of image and text evidence more adaptive and explainable.
+Many social media posts are multimodal. A post may contain a title or caption, an image, metadata, and user responses. Text can provide direct semantic evidence, while an image can provide contextual or visual evidence. However, the reliability of each modality is not constant. Some posts contain informative text but weak or irrelevant images, while others contain images that strongly influence the veracity decision. This thesis focuses on making the fusion of image and text evidence more adaptive, transparent, and reproducible. The emphasis is not only on prediction accuracy, but also on whether the fusion decision can be inspected at sample level.
 
-## 1.2 Problem in Brief
+## Problem in Brief
 
 The central problem addressed in this research is the lack of explainable, sample-level adaptive fusion in multimodal fake news detection. Conventional fixed fusion methods combine image and text predictions using a predefined rule, such as equal averaging or confidence-based weighting. These methods can be effective, but they do not explicitly learn a decision policy that selects different modality weights according to the reliability of each sample.
 
 This limitation is important because fake news posts are heterogeneous. A single fusion rule may over-trust a weak modality in some samples and under-use a useful modality in others. In addition, many multimodal systems produce final predictions without explaining how much the image branch and text branch contributed to the decision. This weakens the practical usefulness of the model in settings where users need evidence, not only a label.
 
-## 1.3 Background and Motivation
+## Background and Motivation
 
 Prior research has shown that fake news detection is challenging because fake news can be linguistically persuasive, visually misleading, and context dependent. Early detection systems relied heavily on text, user features, or propagation patterns. More recent multimodal approaches combine textual and visual information because social media posts often use both modalities to shape user perception.
 
 The motivation for this research comes from three observations. First, multimodal evidence is not equally reliable for every sample. Second, the fusion decision should be interpretable because fake news detection is a sensitive application. Third, reinforcement learning provides a natural way to model fusion as an action-selection problem, where the system observes the reliability state of a sample and selects a fusion action.
 
-## 1.4 Novel Approach to Explainable Adaptive Image-Text Fusion
+## Novel Approach to Explainable Adaptive Image-Text Fusion
 
 This research proposes an explainable deep learning framework that uses reinforcement learning-based adaptive fusion. The framework trains an image branch and a text branch separately, then uses their prediction probabilities, confidence scores, quality indicators, and disagreement features to form a reliability-aware state. A lightweight reinforcement learning controller selects one fusion action from a discrete action space. Each action corresponds to an image-text weight pair, and the final prediction is produced by applying the selected weights to the modality probabilities.
 
-The proposed extension is novel in this project because it makes the fusion decision explicit. Instead of only reporting whether a post is real or fake, the framework records the selected action, image weight, text weight, final probability, and explanation artifacts. This provides a more inspectable decision process than a fixed fusion rule.
+The methodological contribution of this work is to make the fusion decision explicit. Instead of only reporting whether a post is real or fake, the framework records the selected action, image weight, text weight, final probability, and explanation artifacts. This provides transparent decision evidence and a more inspectable process than a fixed fusion rule.
 
-## 1.5 Research Aim
+## Research Aim
 
-The aim of this research is to develop and evaluate an explainable multimodal fake news detection framework that adaptively fuses image and text predictions using a reinforcement learning-based reliability-aware fusion policy.
+The aim of this research is to develop and evaluate an explainable multimodal fake news detection framework that uses a reinforcement learning-based reliability-aware policy to provide adaptive sample-level image-text fusion and transparent modality-weight decisions.
 
-## 1.6 Research Objectives
+## Research Objectives
 
 The objectives of this research are:
 
@@ -36,9 +36,9 @@ The objectives of this research are:
 2. To study the theoretical and technological foundations required for image-text fake news detection.
 3. To design a reliability-aware adaptive fusion approach that selects image-text fusion weights at sample level.
 4. To implement a reproducible framework containing image, text, reliability, fusion, baseline, robustness, and explainability components.
-5. To evaluate the proposed framework using held-out data, baseline comparison, ablation, robustness analysis, and qualitative explainability evidence.
+5. To evaluate the proposed framework using held-out data, baseline comparison, ablation, robustness analysis, statistical checks, and explainability evidence.
 
-## 1.7 Research Questions
+## Research Questions
 
 This research addresses the following questions:
 
@@ -48,18 +48,18 @@ This research addresses the following questions:
 4. How can the final prediction be explained at image, text, and fusion levels?
 5. What limitations remain in terms of generalizability, stability, and reliability estimation?
 
-## 1.8 Resource Requirements
+## Resource Requirements
 
 The research required a Python-based deep learning environment, Google Colab GPU runtime, Google Drive storage, GitHub version control, and standard machine learning libraries. The main computational components were PyTorch, Transformers, scikit-learn, pandas, and image-processing utilities. The experiments used the Fakeddit multimodal dataset and a final computable subset for image-text evaluation.
 
-## 1.9 Scope and Delimitations
+## Scope and Delimitations
 
 The scope of this thesis is limited to binary fake news detection using image and text modalities. The work uses Fakeddit multimodal metadata and available downloaded images. It does not evaluate external social media streams, cross-domain datasets, user propagation graphs, or human participant studies. The explainability component provides qualitative image, text, and fusion-level explanations, together with a deletion-based faithfulness check on a 300-sample subset. The study does not claim complete explanation faithfulness or human-centered explanation validation.
 
-## 1.10 Structure of the Thesis
+## Structure of the Thesis
 
 Chapter 2 reviews developments and challenges in fake news detection and multimodal fusion. Chapter 3 explains the theoretical foundations of the technologies used in the framework. Chapter 4 presents the proposed reinforcement learning-based adaptive fusion approach. Chapter 5 describes the analysis and design of the framework. Chapter 6 explains implementation details. Chapter 7 evaluates the framework using experimental results, baseline comparisons, ablation, robustness, and explainability evidence. Chapter 8 concludes the thesis and discusses limitations and future work.
 
-## 1.11 Summary
+## Summary
 
 This chapter introduced the research problem, motivation, aim, objectives, research questions, scope, and thesis structure. The central gap is the need for explainable, sample-level adaptive image-text fusion in fake news detection. The next chapter reviews related work and positions this gap within existing fake news detection and multimodal learning research.

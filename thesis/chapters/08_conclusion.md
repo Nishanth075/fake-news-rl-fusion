@@ -1,20 +1,20 @@
 # Chapter 8: Conclusion and Further Work
 
-## 8.1 Introduction
+## Introduction
 
 This chapter concludes the thesis by summarizing the research contributions, objective achievement, quantitative results, limitations, challenges, and future work. The conclusion is written in relation to the research aim: to develop and evaluate an explainable multimodal fake news detection framework that adaptively fuses image and text predictions using reinforcement learning.
 
-## 8.2 Summary of Research Contributions
+## Summary of Research Contributions
 
-The main contribution of this research is an explainable adaptive fusion framework for multimodal fake news detection. The framework combines a ResNet-based image branch, a DistilBERT-based text branch, reliability feature extraction, reinforcement learning-based fusion, baseline evaluation, robustness analysis, and explanation generation.
+The main contribution of this research is a transparent reliability-aware adaptive fusion framework for multimodal fake news detection. The framework combines a ResNet-based image branch, a DistilBERT-based text branch, reliability feature extraction, reinforcement learning-based fusion, baseline evaluation, robustness analysis, and explanation generation.
 
-The first contribution is the formulation of image-text fusion as a reliability-aware action-selection problem. Instead of using a fixed fusion rule for all samples, the system observes a state containing prediction, confidence, quality, and disagreement features, then selects a fusion action.
+The first contribution is the formulation of image-text fusion as a reliability-aware contextual-bandit-style action-selection problem. Instead of using a fixed fusion rule for all samples, the system observes a state containing prediction, confidence, quality, and disagreement features, then selects an interpretable fusion action.
 
 The second contribution is the implementation of a reproducible experimental pipeline. The project includes dataset preparation, image downloading, model training, inference, reliability computation, baseline comparison, RL fusion, supervised fusion, ablation, robustness, threshold tuning, seed checks, and explainability outputs.
 
 The third contribution is the explanation mechanism. The framework produces Grad-CAM image explanations, token-level text saliency, and fusion-level action/weight explanations.
 
-## 8.3 Achievement of Objectives
+## Achievement of Objectives
 
 The first objective was to conduct a critical literature review. This was addressed by reviewing fake news detection, multimodal learning, fusion strategies, reinforcement learning, and explainable AI. The review identified the gap for sample-level adaptive and explainable fusion.
 
@@ -26,7 +26,7 @@ The fourth objective was to implement a reproducible framework. This was achieve
 
 The fifth objective was to evaluate the framework. This was achieved through held-out test evaluation, baseline comparison, ablation, robustness analysis, explainability examples, and seed stability checks.
 
-## 8.4 Quantitative Performance Summary
+## Quantitative Performance Summary
 
 The final evaluation used 26,471 available multimodal samples from the Fakeddit-derived final subset. The image-only branch achieved 0.7769 test macro F1, while the text-only branch achieved 0.8388. The best fixed fusion baselines achieved approximately 0.8673 test macro F1. The main RL adaptive fusion run achieved 0.8676 test macro F1, and validation-selected threshold tuning improved it to 0.8685.
 
@@ -34,7 +34,7 @@ The ablation study showed that the full reliability-aware state improved over re
 
 The matched supervised MLP fusion baseline achieved 0.8547 macro F1 at the default threshold and 0.8565 after threshold tuning. The RL fusion result was higher in the main final run, and paired McNemar testing showed a significant difference against the matched supervised MLP controller (p=0.000045). However, multi-seed checks showed that the RL improvement over fixed fusion was not stable across all tested seeds. Therefore, the performance conclusion is stated cautiously.
 
-## 8.5 Limitations of the Study
+## Limitations of the Study
 
 The first limitation is dataset scope. The final evaluation used a subset derived from one dataset source. Therefore, the main results demonstrate within-dataset generalization, not universal real-world generalization. An additional OpenFake external case study showed that cross-dataset transfer was difficult: the text branch retained ranking signal after calibration, but the image branch and the Fakeddit-trained fusion policy did not transfer strongly in zero-shot form.
 
@@ -46,11 +46,11 @@ The fourth limitation is explainability validation. A deletion-based faithfulnes
 
 The fifth limitation is the simplicity of the reward function. The binary reward supports clear training but does not reward calibration or probability margin.
 
-## 8.6 Challenges Encountered
+## Challenges Encountered
 
 Several practical challenges were encountered during the research. Image downloading from the dataset was incomplete because some external image URLs were unavailable. Computational limitations required the use of manageable final subsets and GPU runtime planning. The fusion controller required careful baseline comparison because small numerical improvements can be misleading if training budgets are not controlled. Finally, explainability outputs had to be designed so that image, text, and fusion-level evidence could be inspected together.
 
-## 8.7 Future Work
+## Future Work
 
 Future work should evaluate the framework on additional multimodal fake news datasets and cross-domain event splits. The OpenFake case study indicates that future versions should include external-domain calibration and domain adaptation rather than assuming that probabilities learned from one dataset will transfer unchanged. The RL fusion controller should also be trained with more seeds, tuned more systematically, and compared using statistical tests on larger evaluation protocols.
 
@@ -58,6 +58,6 @@ The text branch could be improved using stronger regularization, validation-loss
 
 Finally, explainability evaluation should be expanded beyond the current deletion-based check using insertion tests, larger perturbation protocols, and human-centered studies to determine whether the generated explanations are useful and trustworthy.
 
-## 8.8 Summary
+## Summary
 
-This thesis presented an explainable reinforcement learning-based adaptive fusion framework for multimodal fake news detection. The framework achieved competitive performance against strong baselines and provided sample-level fusion explanations through modality weights and saliency outputs. The research demonstrates that adaptive fusion is a useful direction for explainable fake news detection, particularly when compared with matched learned controller baselines, while also identifying stability, generalizability, and expanded explainability validation as important future work.
+This thesis presented a reinforcement learning-based adaptive fusion framework for multimodal fake news detection. The framework demonstrates that reliability-aware adaptive fusion can provide competitive multimodal performance while exposing interpretable sample-level modality decisions through action records, modality weights, and branch-level evidence. The contribution is therefore a transparent and reproducible adaptive fusion framework rather than a claim of superior predictive accuracy. Future work should improve policy stability, uncertainty estimation, external validation, domain adaptation, and explanation faithfulness evaluation.
