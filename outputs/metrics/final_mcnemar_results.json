@@ -1,0 +1,39 @@
+{
+  "methodology": {
+    "test": "two-sided exact McNemar test using statsmodels.stats.contingency_tables.mcnemar",
+    "alignment": "sample_id inner alignment with exact label check; row order is not trusted",
+    "b_definition": "RL correct and baseline incorrect",
+    "c_definition": "RL incorrect and baseline correct",
+    "statistic_note": "For exact McNemar tests, statsmodels reports a statistic equivalent to min(b, c).",
+    "superiority_rule": "Do not state RL is superior unless b > c, p < 0.05, and protocols are fair/matched."
+  },
+  "results": [
+    {
+      "rl_method": "rl_full_state_adaptive_fusion",
+      "baseline_method": "equal_fusion",
+      "status": "blocked_missing_or_invalid_source",
+      "blocker": "missing file: outputs/metrics/final_rl_fusion_test_predictions.csv; missing file: data/final_modality_outputs/test_outputs.csv",
+      "threshold_protocol": "RL=default_threshold_0.5; baseline=default_threshold_0.5_derived_from_modality_probabilities",
+      "source_rl_file": "outputs/metrics/final_rl_fusion_test_predictions.csv",
+      "source_baseline_file": "data/final_modality_outputs/test_outputs.csv"
+    },
+    {
+      "rl_method": "rl_full_state_adaptive_fusion",
+      "baseline_method": "confidence_weighted_fusion",
+      "status": "blocked_missing_or_invalid_source",
+      "blocker": "missing file: outputs/metrics/final_rl_fusion_test_predictions.csv; missing file: data/final_modality_outputs/test_outputs.csv",
+      "threshold_protocol": "RL=default_threshold_0.5; baseline=default_threshold_0.5_derived_from_modality_probabilities",
+      "source_rl_file": "outputs/metrics/final_rl_fusion_test_predictions.csv",
+      "source_baseline_file": "data/final_modality_outputs/test_outputs.csv"
+    },
+    {
+      "rl_method": "rl_full_state_adaptive_fusion",
+      "baseline_method": "matched_supervised_mlp_fusion",
+      "status": "blocked_missing_or_invalid_source",
+      "blocker": "missing file: outputs/metrics/final_rl_fusion_test_predictions.csv; missing file: outputs/metrics/final_supervised_fusion_matched_test_predictions.csv",
+      "threshold_protocol": "RL=default_threshold_0.5; baseline=default_threshold_0.5",
+      "source_rl_file": "outputs/metrics/final_rl_fusion_test_predictions.csv",
+      "source_baseline_file": "outputs/metrics/final_supervised_fusion_matched_test_predictions.csv"
+    }
+  ]
+}
