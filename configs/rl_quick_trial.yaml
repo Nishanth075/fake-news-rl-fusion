@@ -1,0 +1,25 @@
+paths:
+  train_outputs: data/final_modality_outputs/train_outputs.csv
+  validation_outputs: data/final_modality_outputs/validation_outputs.csv
+  test_outputs: data/final_modality_outputs/test_outputs.csv
+  current_rl_metrics: outputs/metrics/final_rl_fusion_metrics.json
+  output_dir: outputs/rl_quick_trial
+
+checks:
+  equal_f1_tolerance: 0.001
+
+discrete:
+  hidden_dims: [64, 32]
+  dropout: 0.1
+  learning_rate: 0.001
+  batch_size: 64
+  epochs: 50
+  epsilon_start: 1.0
+  epsilon_end: 0.05
+
+continuous:
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  batch_size: 64
+  epochs: 100
+  early_stopping_patience: 10
